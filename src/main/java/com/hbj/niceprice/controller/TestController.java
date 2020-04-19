@@ -1,13 +1,13 @@
 package com.hbj.niceprice.controller;
 
-import com.huibijia.demo.dao.UrlDataDao;
-import com.huibijia.demo.entity.Product;
-import com.huibijia.demo.entity.UrlData;
+import com.hbj.niceprice.dao.TbDataCraw;
+import com.hbj.niceprice.dao.UrlData;
+import com.hbj.niceprice.entity.Product;
 
 import java.util.List;
 
-import static com.huibijia.demo.dao.UrlDataDao.soupTmallDetailById;
-import static com.huibijia.demo.dao.UrlUtils.analyseUrl;
+import static com.hbj.niceprice.dao.TbDataCraw.soupTmallDetailById;
+import static com.hbj.niceprice.dao.UrlUtils.analyseUrl;
 
 public class TestController {
     public static void main(String[] args) {
@@ -19,6 +19,6 @@ public class TestController {
         Product p = (Product) soupTmallDetailById(tmall.getNumber());
 
 //        通过关键字搜索商品信息
-        List<Product> pList = UrlDataDao.soupTaobaoByKeyWord("airpods2");
+        List<Product> pList = TbDataCraw.soupTaobaoByKeyWord("airpods2");
     }
 }

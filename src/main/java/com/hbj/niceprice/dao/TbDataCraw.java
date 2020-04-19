@@ -1,7 +1,6 @@
 package com.hbj.niceprice.dao;
 
-import com.huibijia.demo.dao.UrlConst;
-import com.huibijia.demo.entity.Product;
+import com.hbj.niceprice.entity.Product;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
