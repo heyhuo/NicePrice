@@ -41,25 +41,25 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- MySql-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!--hadoop-->
-        <dependency>
-            <groupId>ch.cern.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>2.7.5.1</version>
-            <classifier>sources</classifier>
-            <type>java-source</type>
-        </dependency>
-        <dependency>
-            <groupId>ai.h2o</groupId>
-            <artifactId>sparkling-water-core_2.10</artifactId>
-            <version>1.6.1</version>
-            <type>pom</type>
-        </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>ch.cern.hadoop</groupId>-->
+        <!--            <artifactId>hadoop-common</artifactId>-->
+        <!--            <version>2.7.5.1</version>-->
+        <!--            <classifier>sources</classifier>-->
+        <!--            <type>java-source</type>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>ai.h2o</groupId>-->
+        <!--            <artifactId>sparkling-water-core_2.10</artifactId>-->
+        <!--            <version>1.6.1</version>-->
+        <!--            <type>pom</type>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.spark</groupId>-->
+        <!--            <artifactId>spark-sql_2.11</artifactId>-->
+        <!--            <version>2.1.0</version>-->
+        <!--        </dependency>-->
 
         <!--添加servlet的依赖-->
         <dependency>
@@ -83,6 +83,43 @@
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.flink</groupId>-->
+        <!--            <artifactId>flink-table_2.11</artifactId>-->
+        <!--            <version>1.7.2</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.flink</groupId>-->
+        <!--            <artifactId>flink-jdbc_2.11</artifactId>-->
+        <!--            <version>1.7.2</version>-->
+        <!--        </dependency>-->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-java</artifactId>
+            <version>1.7.2</version>
+            <!--编译时使用，运行时并不使用，所以本地测试需要注释掉-->
+            <!--<scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-streaming-java_2.11</artifactId>
+            <version>1.7.2</version>
+            <!--<scope>provided</scope>-->
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.akka</groupId>
+            <artifactId>akka-actor_2.11</artifactId>
+            <version>2.5.23</version>
+        </dependency>
+
 
     </dependencies>
 

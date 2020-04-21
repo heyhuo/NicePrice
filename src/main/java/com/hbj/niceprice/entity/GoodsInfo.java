@@ -1,8 +1,8 @@
 package com.hbj.niceprice.entity;
 
 public class GoodsInfo {
-    public String GoodsId;
-    public String GoodsName;
+    public String goodsId;
+    public String goodsName;
     public String price;
     public String variety;
     public String detail;
@@ -11,21 +11,32 @@ public class GoodsInfo {
     public String platForm;
     public String aveComment;
 
+    public GoodsInfo(String goodsId, String goodsName, String price, String variety, String detail, String picAddress, String link, String platForm, String aveComment) {
+        this.goodsId = goodsId;
+        this.goodsName = goodsName;
+        this.price = price;
+        this.variety = variety;
+        this.detail = detail;
+        this.picAddress = picAddress;
+        this.link = link;
+        this.platForm = platForm;
+        this.aveComment = aveComment;
+    }
 
     public String getGoodsId() {
-        return GoodsId;
+        return goodsId;
     }
 
     public void setGoodsId(String goodsId) {
-        GoodsId = goodsId;
+        this.goodsId = goodsId;
     }
 
     public String getGoodsName() {
-        return GoodsName;
+        return goodsName;
     }
 
     public void setGoodsName(String goodsName) {
-        GoodsName = goodsName;
+        this.goodsName = goodsName;
     }
 
     public String getPrice() {
@@ -87,8 +98,8 @@ public class GoodsInfo {
     @Override
     public String toString() {
         return "GoodsInfo{" +
-                "GoodsId='" + GoodsId + '\'' +
-                ", GoodsName='" + GoodsName + '\'' +
+                "GoodsId='" + goodsId + '\'' +
+                ", GoodsName='" + goodsName + '\'' +
                 ", price='" + price + '\'' +
                 ", variety='" + variety + '\'' +
                 ", detail='" + detail + '\'' +

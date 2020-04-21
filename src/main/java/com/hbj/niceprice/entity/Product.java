@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 public class Product implements Serializable {
     private Long id;
 
-
     /*电商商品id*/
     private Long number;
 

@@ -1,7 +1,9 @@
+create database nice_price;
+use nice_price;
 -- ----商品----
 create table goods_info
 (
-    goods_id    varchar(30) primary key not null COMMENT 'id',
+    goods_id    varchar(30) primary key not null COMMENT '电商商品id',
     goods_name  varchar(255) COMMENT '名称',
     price       varchar(9) COMMENT '价格',
     variety     varchar(20) COMMENT '商品种类',
@@ -12,13 +14,15 @@ create table goods_info
     ave_comment varchar(3) COMMENT '评分均值'
 ) COMMENT ='商品';
 
+# 插入测试
+insert into
 -- ----用户----
-Create table user_info
+    Create table user_info
 (
-    user_id    int(10) not null primary key auto_increment COMMENT '用户id',
-    user_count varchar(11) COMMENT '用户账号',
-    user_pwd   varchar(30) COMMENT '用户密码'
-) COMMENT ='用户';
+    user_id int(10) not null primary key auto_increment COMMENT '用户id',
+    user_count varchar (11) COMMENT '用户账号',
+    user_pwd varchar (30) COMMENT '用户密码'
+    ) COMMENT ='用户';
 
 -- ----评价----
 Create table comments
