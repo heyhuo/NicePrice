@@ -5,6 +5,7 @@ public class Comments {
     public String goodsId;
     public String gradeComment;
 
+
     public int getUserId() {
         return userId;
     }

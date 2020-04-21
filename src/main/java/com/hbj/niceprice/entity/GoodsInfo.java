@@ -11,6 +11,7 @@ public class GoodsInfo {
     public String platForm;
     public String aveComment;
 
+
     public String getGoodsId() {
         return GoodsId;
     }

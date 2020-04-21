@@ -7,6 +7,7 @@ public class PriceSave {
     public String priceTime;
     public String price;
 
+
     public String getGoodsId() {
         return goodsId;
     }
