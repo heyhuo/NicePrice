@@ -20,6 +20,21 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <mirrors>
+        <mirror>
+            <id>nexus-osc</id>
+            <mirrorOf>central</mirrorOf><!--这里指定只屏蔽central仓库-->
+            <name>Nexus osc</name>
+            <url>http://maven.oschina.net/content/groups/public/</url>
+        </mirror>
+        <mirror>
+            <id>nexus-osc-thirdparty</id>
+            <mirrorOf>thirdparty</mirrorOf>
+            <name>Nexus osc thirdparty</name>
+            <url>http://maven.oschina.net/content/repositories/thirdparty/</url>
+        </mirror>
+    </mirrors>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,6 +115,8 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.46</version>
         </dependency>
+
+        <!--flink java-->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
@@ -120,6 +137,32 @@
             <version>2.5.23</version>
         </dependency>
 
+        <!--flink kafka connector-->
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>flink-connector-kafka_2.11</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+        <!--alibaba fastjson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.51</version>
+        </dependency>
+
+        <!--日志-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>runtime</scope>
+        </dependency>
 
     </dependencies>
 

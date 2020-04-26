@@ -1,7 +1,4 @@
-package com.hbj.niceprice.dao;
-
-import com.sun.xml.internal.bind.v2.bytecode.ClassTailor;
-
+package com.hbj.niceprice.test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

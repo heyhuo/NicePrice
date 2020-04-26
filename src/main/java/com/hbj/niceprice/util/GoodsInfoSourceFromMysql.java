@@ -1,4 +1,4 @@
-package com.hbj.niceprice.dao;
+package com.hbj.niceprice.util;
 
 import com.hbj.niceprice.entity.GoodsInfo;
 import org.apache.flink.configuration.Configuration;
@@ -10,12 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
-    String driver = "com.mysql.jdbc.Driver";
-    String url = "jdbc:mysql://localhost:3306/nice_price";
-    String username = "root";
-    String password = "huoshan";
-    private Connection connection = null;
-    private PreparedStatement ps = null;
+
+    private static Connection connection;
+    PreparedStatement ps = null;
 
     /**
      * open()方法中建立拦截，这样不用每次invoke的时候都需要建立连接和释放连接
@@ -27,7 +24,7 @@ public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
         connection = getConnection();
         String sql = "select * from nice_price.goods_info;";
         //获取执行语句
-        ps = connection.prepareStatement(sql);
+        ps = this.connection.prepareStatement(sql);
     }
 
 
@@ -38,9 +35,10 @@ public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
     @Override
     public void run(SourceContext<GoodsInfo> ctx) throws Exception {
         ResultSet rs = ps.executeQuery();
+        int i = 0;
         while (rs.next()) {
             GoodsInfo goodsInfo = new GoodsInfo(
-                    rs.getString("goods_id") + "aaaa",
+                    rs.getString("goods_id") + (i++),
                     rs.getString("goods_name"),
                     rs.getString("price"),
                     rs.getString("variety"),
@@ -48,8 +46,7 @@ public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
                     rs.getString("pic_address"),
                     rs.getString("link"),
                     rs.getString("plat_form"),
-                    rs.getString("ave_comment")
-            );
+                    rs.getString("ave_comment"));
             ctx.collect(goodsInfo);//发送结果
         }
     }
@@ -75,7 +72,12 @@ public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
     }
 
     //获取mysql连接配置
-    private Connection getConnection() {
+    private static Connection getConnection() {
+        String driver = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/nice_price?useUnicode=true&characterEncoding=UTF-8";
+        String username = "root";
+        String password = "huoshan";
+
         try {
             //加载驱动
             Class.forName(driver);

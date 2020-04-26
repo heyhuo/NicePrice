@@ -1,4 +1,4 @@
-package com.hbj.niceprice.dao;
+package com.hbj.niceprice.util;
 
 
 import org.springframework.util.StringUtils;

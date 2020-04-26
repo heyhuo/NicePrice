@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--相当于UserMapper接口的实现 namespace必须是UserMapper类路径-->
+<mapper namespace="com.hbj.niceprice.dao.GoodsInfoMapper">
+    <!-- findById必须和接口中的方法名一样 返回一个User-->
+    <select id="findById" parameterType="Long"
+            resultType="com.hbj.niceprice.entity.GoodsInfo">
+        select *
+        from goods_info
+        where goods_id = #{goods_id}
+    </select>
+
+    <insert id="insert" parameterType="com.hbj.niceprice.entity.GoodsInfo">
+        insert into goods_info(goods_id, goods_name, price, variety, detail, pic_address, link, plat_form)
+        values (#{goods_id}, #{goods_name}, #{price}, #{variety}, #{detail}, #{pic_address}, #{link}, #{plat_form})
+    </insert>
+</mapper>

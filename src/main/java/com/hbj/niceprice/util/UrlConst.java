@@ -1,4 +1,4 @@
-package com.hbj.niceprice.dao;
+package com.hbj.niceprice.util;
 
 public class UrlConst {
     static String taobaoUrlSign = "taobao.com";

@@ -1,5 +1,7 @@
 package com.hbj.niceprice.entity;
 
+import org.apache.flink.streaming.api.functions.source.SourceFunction;
+
 public class GoodsInfo {
     public String goodsId;
     public String goodsName;

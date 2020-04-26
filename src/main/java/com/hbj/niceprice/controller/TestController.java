@@ -1,13 +1,13 @@
 //package com.hbj.niceprice.controller;
 //
 //import com.hbj.niceprice.dao.TbDataCraw;
-//import com.hbj.niceprice.dao.UrlData;
+//import com.hbj.niceprice.flinkUtil.UrlData;
 //import com.hbj.niceprice.entity.Product;
 //
 //import java.util.List;
 //
 //import static com.hbj.niceprice.dao.TbDataCraw.soupTmallDetailById;
-//import static com.hbj.niceprice.dao.UrlUtils.analyseUrl;
+//import static com.hbj.niceprice.flinkUtil.UrlUtils.analyseUrl;
 //
 //public class TestController {
 //    public static void main(String[] args) {
