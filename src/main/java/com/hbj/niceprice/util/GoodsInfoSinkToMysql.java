@@ -1,7 +1,6 @@
 package com.hbj.niceprice.util;
 
-import com.hbj.niceprice.dao.GoodsInfoDao;
-import com.hbj.niceprice.dao.GoodsInfoMapper;
+//import com.hbj.niceprice.mapper.GoodsInfoMapper;
 import com.hbj.niceprice.entity.GoodsInfo;
 
 import org.apache.flink.configuration.Configuration;
@@ -15,7 +14,7 @@ public class GoodsInfoSinkToMysql extends RichSinkFunction<GoodsInfo> {
 
     PreparedStatement ps;
     private Connection connection;
-    private GoodsInfoMapper goodsInfoMapper;
+//    private GoodsInfoMapper goodsInfoMapper;
 
     /**
      * open() 方法中建立连接，这样不用每次 invoke 的时候都要建立连接和释放连接
@@ -27,7 +26,8 @@ public class GoodsInfoSinkToMysql extends RichSinkFunction<GoodsInfo> {
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         connection = getConnection();
-        String sql = "insert into goods_info(goods_id, goods_name, price, variety,detail,pic_address,link,plat_form) values(?, ?, ?, ?,?, ?, ?, ?);";
+        String sql = "insert into goods_info(goods_id, goods_name, price, variety,tag,detail,pic_address,link,plat_form) values(?, ?, ?,?, ?,?, ?, ?, ?)" +
+                "on duplicate key update price=?,tag=?;";
         ps = this.connection.prepareStatement(sql);
 //        try {
 //            goodsInfoMapper = GoodsInfoDao.getInstance();
@@ -51,10 +51,13 @@ public class GoodsInfoSinkToMysql extends RichSinkFunction<GoodsInfo> {
         ps.setString(2, value.getGoodsName());
         ps.setString(3, value.getPrice());
         ps.setString(4, value.getVariety());
-        ps.setString(5, value.getDetail());
-        ps.setString(6, value.getPicAddress());
-        ps.setString(7, value.getLink());
-        ps.setString(8, value.getPlatForm());
+        ps.setString(5, value.getTag());
+        ps.setString(6, value.getDetail());
+        ps.setString(7, value.getPicAddress());
+        ps.setString(8, value.getLink());
+        ps.setString(9, value.getPlatForm());
+        ps.setString(10, value.getPrice());
+        ps.setString(11, value.getTag());
         ps.executeUpdate();
 //        GoodsInfo goodsInfo = new GoodsInfo(value.getGoodsId(),
 //                value.getGoodsName(), value.getPrice(), value.getPrice(),

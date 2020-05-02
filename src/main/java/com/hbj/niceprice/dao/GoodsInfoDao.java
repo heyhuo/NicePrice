@@ -1,6 +1,7 @@
 package com.hbj.niceprice.dao;
 
 
+import com.hbj.niceprice.mapper.GoodsInfoMapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

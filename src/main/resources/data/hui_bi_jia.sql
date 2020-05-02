@@ -7,6 +7,7 @@ create table goods_info
     goods_name  varchar(255) COMMENT '名称',
     price       varchar(9) COMMENT '价格',
     variety     varchar(20) COMMENT '商品种类',
+    tag         varchar(255) COMMENT '商品标签',
     detail      text COMMENT '详细描述',
     pic_address text COMMENT '图片地址',
     link        text COMMENT '链接',
@@ -15,14 +16,14 @@ create table goods_info
 ) COMMENT ='商品';
 
 # 插入测试
-insert into
+# insert into
 -- ----用户----
-    Create table user_info
+Create table user_info
 (
-    user_id int(10) not null primary key auto_increment COMMENT '用户id',
-    user_count varchar (11) COMMENT '用户账号',
-    user_pwd varchar (30) COMMENT '用户密码'
-    ) COMMENT ='用户';
+    user_id    int(10) not null primary key auto_increment COMMENT '用户id',
+    user_count varchar(11) COMMENT '用户账号',
+    user_pwd   varchar(30) COMMENT '用户密码'
+) COMMENT ='用户';
 
 -- ----评价----
 Create table comments

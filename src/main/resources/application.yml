@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: huoshan
+    url: jdbc:mysql://localhost:3306/nice_price?characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.hbj.niceprice.entity
+
+#showSql
+logging:
+  level:
+    com:
+      hbj:
+        niceprice:
+          mapper: debug

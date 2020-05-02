@@ -38,10 +38,11 @@ public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
         int i = 0;
         while (rs.next()) {
             GoodsInfo goodsInfo = new GoodsInfo(
-                    rs.getString("goods_id") + (i++),
+                    rs.getString("goods_id"),
                     rs.getString("goods_name"),
                     rs.getString("price"),
                     rs.getString("variety"),
+                    rs.getString("tag"),
                     rs.getString("detail"),
                     rs.getString("pic_address"),
                     rs.getString("link"),

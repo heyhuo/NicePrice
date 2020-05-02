@@ -1,0 +1,5 @@
+kafka是基于zookeeper的，启动kafka之前，需要先启动zookeeper
+/usr/local/Cellar/kafka/2.5.0/bin/zookeeper-server-start /usr/local/etc/kafka/zookeeper.properties &
+
+启动kafka
+/usr/local/Cellar/kafka/2.5.0/bin/kafka-server-start /usr/local/etc/kafka/server.properties &

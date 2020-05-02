@@ -12,17 +12,25 @@ public class GoodsInfo {
     public String link;
     public String platForm;
     public String aveComment;
+    public String tag;
 
-    public GoodsInfo(String goodsId, String goodsName, String price, String variety, String detail, String picAddress, String link, String platForm, String aveComment) {
+
+    public GoodsInfo() {
+    }
+
+    public GoodsInfo(String goodsId, String goodsName, String price, String variety, String tag, String detail,
+                     String picAddress, String link, String platForm, String aveComment) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.price = price;
         this.variety = variety;
+        this.tag = tag;
         this.detail = detail;
         this.picAddress = picAddress;
         this.link = link;
         this.platForm = platForm;
         this.aveComment = aveComment;
+
     }
 
     public String getGoodsId() {
@@ -97,13 +105,22 @@ public class GoodsInfo {
         this.aveComment = aveComment;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public String toString() {
         return "GoodsInfo{" +
-                "GoodsId='" + goodsId + '\'' +
-                ", GoodsName='" + goodsName + '\'' +
+                "goodsId='" + goodsId + '\'' +
+                ", goodsName='" + goodsName + '\'' +
                 ", price='" + price + '\'' +
                 ", variety='" + variety + '\'' +
+                ", tag='" + tag + '\'' +
                 ", detail='" + detail + '\'' +
                 ", picAddress='" + picAddress + '\'' +
                 ", link='" + link + '\'' +
