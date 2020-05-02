@@ -13,4 +13,8 @@ public interface GoodsInfoMapper {
     void insert(GoodsInfo goodsInfo);
 
     List<GoodsInfo> selectAll();
+
+    List<GoodsInfo> selectByVariety(String variety, Integer page, Integer size);
+
+    List<GoodsInfo> getListByVariety(String variety);
 }

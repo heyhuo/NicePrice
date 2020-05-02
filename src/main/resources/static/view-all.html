@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- 引入 Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
+    <script src="js/jquery.min.js"></script>
     <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
     <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
     <!--[if lt IE 9]>
@@ -71,7 +71,7 @@
                         </span>
                         </div>
                     </form>
-                    <ul class="nav navbar-nav navbar-right" >
+                    <ul class="nav navbar-nav navbar-right">
                         <br><br>
                         <li>
                             <a href="#" style="color: darkred">登录 | 注册</a>
@@ -83,183 +83,250 @@
         </div>
     </div>
 </div>
-<hr><br><br><br><br>
+<hr>
+<br><br><br><br>
 
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
-            <h3>
-                运动户外
+            <h3 id="goodsVariety">
+                null
             </h3>
             <br>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/zhangpeng.jpg" />
-                        <div class="caption">
-                            <div class="row clearfix">
-                                <div class="col-md-5 column">
-                                    <h3>￥178.00</h3>
-                                </div>
-                                <div class="col-md-7 column">
-                                    <br>
-                                    <s>￥188.00</s>
-                                </div>
-                            </div>
-                            <a href="">
-                                北极狼 BeiJiLang 全自动帐篷户外...
-                            </a>
-                            <p><span class="glyphicon glyphicon-star-empty"></span>星级评论</p>
-                            <p>京东</p>
-                            <p>01-31 18:36</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/zuqiu.jpg" />
-                        <div class="caption">
-                            <div class="row clearfix">
-                                <div class="col-md-5 column">
-                                    <h3>￥145.00</h3>
-                                </div>
-                                <div class="col-md-7 column">
-                                    <br>
-                                    <s>￥198.00</s>
-                                </div>
-                            </div>
-                            <a href="">
-                                耐克（Nike）5号足球标准成人比赛...
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/lanqiu.jpg" />
-                        <div class="caption">
-                            <div class="caption">
-                                <div class="row clearfix">
-                                    <div class="col-md-5 column">
-                                        <h3>￥98.00</h3>
-                                    </div>
-                                    <div class="col-md-7 column">
-                                        <br>
-                                        <s>￥178.00</s>
-                                    </div>
-                                </div>
-                                <a href="">
-                                    斯伯丁Spalding NBA比赛篮球室...
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/yaobao.jpg" />
-                        <div class="caption">
-                            <div class="row clearfix">
-                                <div class="col-md-5 column">
-                                    <h3>￥39.00</h3>
-                                </div>
-                                <div class="col-md-7 column">
-                                    <br>
-                                    <s>￥59.00</s>
-                                </div>
-                            </div>
-                            <a href="#">
-                                加加林 运动跑步腰包多功能腰带 防...
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div id="goodsList">
+
             </div>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/zhangpeng.jpg" />
-                        <div class="caption">
-                            <div class="row clearfix">
-                                <div class="col-md-5 column">
-                                    <h3>￥178.00</h3>
-                                </div>
-                                <div class="col-md-7 column">
-                                    <br>
-                                    <s>￥188.00</s>
-                                </div>
-                            </div>
-                            <a href="">
-                                北极狼 BeiJiLang 全自动帐篷户外...
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/zuqiu.jpg" />
-                        <div class="caption">
-                            <div class="row clearfix">
-                                <div class="col-md-5 column">
-                                    <h3>￥145.00</h3>
-                                </div>
-                                <div class="col-md-7 column">
-                                    <br>
-                                    <s>￥198.00</s>
-                                </div>
-                            </div>
-                            <a href="">
-                                耐克（Nike）5号足球标准成人比赛...
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/lanqiu.jpg" />
-                        <div class="caption">
-                            <div class="caption">
-                                <div class="row clearfix">
-                                    <div class="col-md-5 column">
-                                        <h3>￥98.00</h3>
-                                    </div>
-                                    <div class="col-md-7 column">
-                                        <br>
-                                        <s>￥178.00</s>
-                                    </div>
-                                </div>
-                                <a href="">
-                                    斯伯丁Spalding NBA比赛篮球室...
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="thumbnail">
-                        <img alt="300x200" src="img/yaobao.jpg" />
-                        <div class="caption">
-                            <div class="row clearfix">
-                                <div class="col-md-5 column">
-                                    <h3>￥39.00</h3>
-                                </div>
-                                <div class="col-md-7 column">
-                                    <br>
-                                    <s>￥59.00</s>
-                                </div>
-                            </div>
-                            <a href="#">
-                                加加林 运动跑步腰包多功能腰带 防...
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="row">-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/zhangpeng.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥178.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥188.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="">-->
+            <!--北极狼 BeiJiLang 全自动帐篷户外...-->
+            <!--</a>-->
+            <!--<p><span class="glyphicon glyphicon-star-empty"></span>星级评论</p>-->
+            <!--<p>京东</p>-->
+            <!--<p>01-31 18:36</p>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/zuqiu.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥145.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥198.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="">-->
+            <!--耐克（Nike）5号足球标准成人比赛...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/lanqiu.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥98.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥178.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="">-->
+            <!--斯伯丁Spalding NBA比赛篮球室...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/yaobao.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥39.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥59.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="#">-->
+            <!--加加林 运动跑步腰包多功能腰带 防...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row">-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/zhangpeng.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥178.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥188.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="">-->
+            <!--北极狼 BeiJiLang 全自动帐篷户外...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/zuqiu.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥145.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥198.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="">-->
+            <!--耐克（Nike）5号足球标准成人比赛...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/lanqiu.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥98.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥178.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="">-->
+            <!--斯伯丁Spalding NBA比赛篮球室...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3">-->
+            <!--<div class="thumbnail">-->
+            <!--<img alt="300x200" src="img/yaobao.jpg"/>-->
+            <!--<div class="caption">-->
+            <!--<div class="row clearfix">-->
+            <!--<div class="col-md-5 column">-->
+            <!--<h3>￥39.00</h3>-->
+            <!--</div>-->
+            <!--<div class="col-md-7 column">-->
+            <!--<br>-->
+            <!--<s>￥59.00</s>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<a href="#">-->
+            <!--加加林 运动跑步腰包多功能腰带 防...-->
+            <!--</a>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </div>
 
 
-
 </body>
+<script type="text/javascript">
+    $(function () {
+        let urlParam = decodeURI(getUrlParam("variety"));
+        console.log(urlParam);
+        getListByVariety(urlParam);
+    })
+</script>
+<script type="text/javascript">
+    //获取url中的参数
+    function getUrlParam(name) {
+        //正则表达式，获取地址中的参数
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    function getListByVariety(variety) {
+
+        $.ajax({
+            type: "POST",
+            url: "/hbj/getListByVariety",
+            data: {
+                variety: variety
+            },
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+                let rs = data;
+                let a = ' <div class="row">';
+                let b = '';
+                let variety = rs[0].variety;
+                $("#goodsVariety").text(variety);
+                for (let i = 0; i < rs.length; i++) {
+                    console.log(rs[i].price);
+                    b += '<div class="col-md-3">\n' +
+                        '                    <div class="thumbnail">\n' +
+                        '                        <img alt="300x200" src="' + rs[i].picAddress + '"/>\n' +
+                        '                        <div class="caption">\n' +
+                        '                            <div class="row clearfix">\n' +
+                        '                                <div class="col-md-5 column">\n' +
+                        '                                    <h3>￥' + rs[i].price + '</h3>\n' +
+                        '                                </div>\n' +
+                        '                                <div class="col-md-7 column">\n' +
+                        '                                    <br>\n' +
+                        '                                    <s>￥' + rs[i].price + '</s>\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                            <a href="' + rs[i].link + '">' + rs[i].goodsName +
+                        '                            </a>\n' +
+                        '                        </div>\n' +
+                        '                    </div>\n' +
+                        '                </div>';
+                    if ((i + 1) % 4 == 0) {
+                        b = a + b + '</div>';
+                        $("#goodsList").append(b);
+                        b = '';
+                    }
+                }
+            }
+        })
+
+    }
+</script>
 </html>

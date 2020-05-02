@@ -3,13 +3,6 @@
 <!--相当于GoodsInfoMapper接口的实现 namespace必须是GoodsInfoMapper类路径-->
 <mapper namespace="com.hbj.niceprice.mapper.GoodsInfoMapper">
 
-    <!--    <resultMap id="BaseResultMap" type="com.example.entity.User">-->
-    <!--        <result column="id" jdbcType="INTEGER" property="id" />-->
-    <!--        <result column="userName" jdbcType="VARCHAR" property="userName" />-->
-    <!--        <result column="passWord" jdbcType="VARCHAR" property="passWord" />-->
-    <!--        <result column="realName" jdbcType="VARCHAR" property="realName" />-->
-    <!--    </resultMap>-->
-
     <!-- findById必须和接口中的方法名一样 返回一个GoodsInfo-->
     <select id="findById" parameterType="String"
             resultType="GoodsInfo">
@@ -23,9 +16,16 @@
         values (#{goods_id}, #{goods_name}, #{price}, #{variety}, #{detail}, #{pic_address}, #{link}, #{plat_form})
     </insert>
 
-    <select id="selectAll" resultType="com.hbj.niceprice.entity.GoodsInfo">
+    <select id="selectAll" resultType="GoodsInfo">
         select *
         from goods_info
     </select>
 
+    <select id="selectByVariety" resultType="GoodsInfo">
+        select * from goods_info where variety=#{variety} order by craw_date desc limit #{page},#{size}
+    </select>
+
+    <select id="getListByVariety" resultType="GoodsInfo">
+        select * from goods_info where  variety=#{variety} order by craw_date desc
+    </select>
 </mapper>

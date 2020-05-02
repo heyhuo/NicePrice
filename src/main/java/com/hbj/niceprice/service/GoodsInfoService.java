@@ -11,7 +11,7 @@ import java.util.List;
 public class GoodsInfoService {
 
     @Autowired
-    GoodsInfoMapper goodsInfoMapper;
+    public GoodsInfoMapper goodsInfoMapper;
 
     public List<GoodsInfo> selectAll() {
         return goodsInfoMapper.selectAll();
@@ -21,5 +21,12 @@ public class GoodsInfoService {
         return goodsInfoMapper.findById(id);
     }
 
+    public List<GoodsInfo> selectByVariety(String variety, Integer page, Integer size) {
+        return goodsInfoMapper.selectByVariety(variety, page, size);
+    }
+
+    public List<GoodsInfo> getListByVariety(String variety) {
+        return goodsInfoMapper.getListByVariety(variety);
+    }
 
 }
