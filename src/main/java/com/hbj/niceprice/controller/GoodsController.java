@@ -33,15 +33,16 @@ public class GoodsController {
         return goodsInfoService.findById(id);
     }
 
-    @RequestMapping(value = "/crawTbGoodsInfo")
-    public void crawTbGoodsInfo() throws Exception {
+    @RequestMapping(value = "/crawTbGoodsInfo", method = GET)
+    public void crawTbGoodsInfo(String keyword) throws Exception {
         String topicName = "crawTbGoodsInfo";
         Flink2GoodsInfoService fgs = new Flink2GoodsInfoService(topicName);
-        fgs.crawGoodsList();
-
         KafkaUtil ku = fgs.getKafkaUtil();
-        ku.setKeyword("耳机");
+        ku.setKeyword(keyword);
         Thread thread = new Thread(ku);
         thread.start();
+
+        Thread t = new Thread(fgs);
+        t.start();
     }
 }

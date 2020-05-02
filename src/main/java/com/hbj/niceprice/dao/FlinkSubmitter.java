@@ -44,5 +44,6 @@ public class FlinkSubmitter {
         goodsInfo.print().setParallelism(1);
         env.execute("Flink Mysql Source->" + kafkaUtil.getTopic());
 
+
     }
 }

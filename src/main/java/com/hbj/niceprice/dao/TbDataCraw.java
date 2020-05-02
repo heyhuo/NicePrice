@@ -20,9 +20,26 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TbDataCraw {
+
+    public Map<String, String> parseTag(Document doc) {
+        String variety = doc.select(".crumbSearch-input").attr("value");
+        Elements tagList = doc.select(".navAttrsForm").select("li");
+        List<String> tags = new ArrayList<>();
+        for (Element item : tagList) {
+            tags.add(item.select("a").attr("title"));
+        }
+        String tag = tags.toString();
+        Map<String, String> rs = new HashMap<>(2);
+        rs.put("variety", variety);
+        rs.put("tag", tag);
+        return rs;
+    }
+
     /*通过关键字查询商品列表详细信息*/
     public List<GoodsInfo> soupTMALLGoodsListByKey(String keyword) {
         try {
@@ -47,17 +64,12 @@ public class TbDataCraw {
                     // doc获取整个页面的所有数据
                     doc = Jsoup.parse(html);
                     //输出doc可以看到所获取到的页面源代码
-                    System.out.println(doc);
                     // 通过浏览器查看商品页面的源代码，找到信息所在的div标签，再对其进行一步一步地解析
 //                    Elements ulList = doc.select("div[class='view']");
 
-                    String variety = doc.select(".attrKey").select("a").attr("title");
-                    Elements tagList = doc.select("ul[class='av-expand']").select("li");
-                    List<String> tags = new ArrayList<>();
-                    for (Element item : tagList) {
-                        tags.add(item.select("a").attr("title"));
-                    }
-                    String tag = tags.toString();
+                    Map<String, String> rs = parseTag(doc);
+                    String variety = rs.get("variety");
+                    String tag = rs.get("tag");
                     Elements ulList = doc.select("#J_ItemList");
                     Elements liList = ulList.select("div[class='product']");
                     // 循环liList的数据（具体获取的数据值还得看doc的页面源代码来获取，可能稍有变动）
@@ -69,19 +81,28 @@ public class TbDataCraw {
                         String id = item.select("div[class='product']").attr("data-id");
 
                         // 商品名称
-                        String name = item.select("p[class='productTitle']").select("a").attr("title");
-
+                        Elements titleList = item.select(".productTitle").select("a");
+                        StringBuffer name = new StringBuffer("");
+                        for (Element t : titleList) {
+                            name.append(titleList.attr("title") + " ");
+                        }
                         // 商品价格
-                        String price = item.select("p[class='productPrice']").select("em").attr("title");
+                        String price = item.select(".productPrice").select("em").attr("title");
 
                         // 商品网址
-                        String goodsUrl = item.select("p[class='productTitle']").select("a").attr("href");
+                        String goodsUrl = item.select(".productTitle").select("a").attr("href");
 
                         // 商品图片网址
-                        String imgUrl = item.select("div[class='productImg-wrap']").select("a").select("img").attr("data-ks-lazyload");
-
+                        String imgUrl = "";
+                        Elements img = item.select(".productImg-wrap").select("img");
+                        if (img.hasAttr("src")) {
+                            imgUrl = img.attr("src");
+                        } else if (img.hasAttr("data-ks-lazyload")) {
+                            imgUrl = img.attr("data-ks-lazyload");
+//                            System.out.println(img.toString());
+                        }
                         String https = "https:";
-                        GoodsInfo goodsInfo = new GoodsInfo(id, name, price, variety, tag, "详情", https + imgUrl, https + goodsUrl, "TMALL", "0");
+                        GoodsInfo goodsInfo = new GoodsInfo(id, name.toString(), price, variety, tag, "详情", https + imgUrl, https + goodsUrl, "TMALL", "0");
 //
                         resultList.add(goodsInfo);
 //                        System.out.println(goodsInfo.toString());

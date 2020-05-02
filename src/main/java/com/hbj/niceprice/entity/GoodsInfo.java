@@ -2,6 +2,10 @@ package com.hbj.niceprice.entity;
 
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 
+import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class GoodsInfo {
     public String goodsId;
     public String goodsName;
@@ -13,7 +17,8 @@ public class GoodsInfo {
     public String platForm;
     public String aveComment;
     public String tag;
-
+    public String crawDate;
+    SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public GoodsInfo() {
     }
@@ -31,6 +36,15 @@ public class GoodsInfo {
         this.platForm = platForm;
         this.aveComment = aveComment;
 
+        this.crawDate = ft.format(new Date());
+    }
+
+    public String getCrawDate() {
+        return crawDate;
+    }
+
+    public void setCrawDate(String crawDate) {
+        this.crawDate = crawDate;
     }
 
     public String getGoodsId() {
@@ -120,12 +134,13 @@ public class GoodsInfo {
                 ", goodsName='" + goodsName + '\'' +
                 ", price='" + price + '\'' +
                 ", variety='" + variety + '\'' +
-                ", tag='" + tag + '\'' +
                 ", detail='" + detail + '\'' +
                 ", picAddress='" + picAddress + '\'' +
                 ", link='" + link + '\'' +
                 ", platForm='" + platForm + '\'' +
                 ", aveComment='" + aveComment + '\'' +
+                ", tag='" + tag + '\'' +
+                ", crawDate=" + crawDate +
                 '}';
     }
 }

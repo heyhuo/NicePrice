@@ -11,7 +11,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 
 import java.util.Properties;
 
-public class Flink2GoodsInfoService {
+public class Flink2GoodsInfoService implements Runnable {
     final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
     KafkaUtil kafkaUtil;
     Properties prop;
@@ -28,7 +28,8 @@ public class Flink2GoodsInfoService {
         return kafkaUtil;
     }
 
-    public void crawGoodsList() throws Exception {
+    @Override
+    public void run() {
         SingleOutputStreamOperator<GoodsInfo> goodsInfo = env.addSource(new FlinkKafkaConsumer<>(
                 this.topicName,   //这个 kafka topic 需要和上面的工具类的 topic 一致
                 new SimpleStringSchema(),
@@ -37,7 +38,11 @@ public class Flink2GoodsInfoService {
         //对于record可以添加一些处理逻辑
         goodsInfo.addSink(new GoodsInfoSinkToMysql());
         goodsInfo.print().setParallelism(1);
-        env.execute("Flink Mysql Source->" + kafkaUtil.getTopic());
+        try {
+            env.execute("Flink Mysql Source->" + this.topicName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
