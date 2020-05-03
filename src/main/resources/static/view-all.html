@@ -7,6 +7,7 @@
     <!-- 引入 Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
     <!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
     <!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
     <!--[if lt IE 9]>
@@ -273,15 +274,6 @@
     })
 </script>
 <script type="text/javascript">
-    //获取url中的参数
-    function getUrlParam(name) {
-        //正则表达式，获取地址中的参数
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]);
-        return null;
-    }
-
     function getListByVariety(variety) {
 
         $.ajax({

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface GoodsInfoMapper {
-    GoodsInfo findById(String Id);
+    GoodsInfo findById(String goodsId);
 
     void insert(GoodsInfo goodsInfo);
 
@@ -17,4 +17,7 @@ public interface GoodsInfoMapper {
     List<GoodsInfo> selectByVariety(String variety, Integer page, Integer size);
 
     List<GoodsInfo> getListByVariety(String variety);
+
+    void updateGoodsDetailById(String goodsId, String detail);
+
 }

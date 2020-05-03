@@ -7,9 +7,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -45,13 +43,15 @@ public class KafkaUtil implements Runnable {
 
     @Override
     public void run() {
-        List<String> list = readKeywordBytxt("/Users/xwj/IdeaProjects/NicePrice/src/main/resources/data/keyword.txt");
+        List<String> list = readKeywordBytxt("src/main/resources/data/keyword.txt");
         for (String keyword : list) {
             keyword = keyword.split("_")[0];
             System.out.println("------------" + keyword + "-----------");
             List<GoodsInfo> goodsInfoList = tbDataCraw.soupTMALLGoodsListByKey(keyword);
             int i = 0;
             for (GoodsInfo g : goodsInfoList) {
+//                String detail = tbDataCraw.soupTmallDetailById(g.getGoodsId());
+//                g.setDetail(detail);
                 i++;
                 System.out.println("序号-" + i + "  " + g.toString());
                 ProducerRecord record = new ProducerRecord(topic, null, null, JSON.toJSONString(g));
@@ -63,14 +63,16 @@ public class KafkaUtil implements Runnable {
     }
 
     public static List<String> readKeywordBytxt(String pathname) {
-        List<String> list = new ArrayList<>();
+        List<String> list = new ArrayList<String>();
+        InputStreamReader isr;
         try {
-            FileReader reader = new FileReader(pathname);
-            BufferedReader br = new BufferedReader(reader);
-            String line;
-            //网友推荐更加简洁的写法
-            while ((line = br.readLine()) != null) {
-                list.add(line);
+            isr = new InputStreamReader(new FileInputStream(UrlConst.keywordUrl), "utf-8");
+            BufferedReader read = new BufferedReader(isr);
+            String s = null;
+            while ((s = read.readLine()) != null) {
+                if (s.trim().length() > 1) {
+                    list.add(s.trim());
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -79,8 +81,9 @@ public class KafkaUtil implements Runnable {
     }
 
     public static void main(String[] args) {
-        KafkaUtil kafkaUtil = new KafkaUtil("test");
-        Thread thread = new Thread(kafkaUtil);
-        thread.start();
+//        KafkaUtil kafkaUtil = new KafkaUtil("test");
+//        Thread thread = new Thread(kafkaUtil);
+//        thread.start();
+        readKeywordBytxt("");
     }
 }

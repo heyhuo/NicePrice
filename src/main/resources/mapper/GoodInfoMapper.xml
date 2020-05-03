@@ -4,11 +4,10 @@
 <mapper namespace="com.hbj.niceprice.mapper.GoodsInfoMapper">
 
     <!-- findById必须和接口中的方法名一样 返回一个GoodsInfo-->
-    <select id="findById" parameterType="String"
-            resultType="GoodsInfo">
+    <select id="findById" resultType="GoodsInfo">
         select *
         from goods_info
-        where goods_id = #{goods_id}
+        where goods_id = #{goodsId}
     </select>
 
     <insert id="insert" parameterType="GoodsInfo">
@@ -22,10 +21,23 @@
     </select>
 
     <select id="selectByVariety" resultType="GoodsInfo">
-        select * from goods_info where variety=#{variety} order by craw_date desc limit #{page},#{size}
+        select *
+        from goods_info
+        where variety = #{variety}
+        order by craw_date desc
+        limit #{page},#{size}
     </select>
 
     <select id="getListByVariety" resultType="GoodsInfo">
-        select * from goods_info where  variety=#{variety} order by craw_date desc
+        select *
+        from goods_info
+        where variety = #{variety}
+        order by craw_date desc
     </select>
+
+    <update id="updateGoodsDetailById">
+        update goods_info
+        set detail=#{detail}
+        where goods_id = #{goodsId}
+    </update>
 </mapper>

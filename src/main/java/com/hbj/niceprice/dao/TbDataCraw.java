@@ -1,12 +1,10 @@
 package com.hbj.niceprice.dao;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.hbj.niceprice.entity.GoodsInfo;
-import com.hbj.niceprice.entity.Product;
 
 import com.hbj.niceprice.util.UrlConst;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -124,7 +122,7 @@ public class TbDataCraw {
     }
 
     /*获取商品详细信息*/
-    public static GoodsInfo soupTmallDetailById(Long number) {
+    public String soupTmallDetailById(String number) {
         try {
             // 需要爬取商品信息的网站地址
             String url = "https://chaoshi.detail.tmall.com/item.htm?id=" + number;
@@ -148,29 +146,24 @@ public class TbDataCraw {
                     //输出doc可以看到所获取到的页面源代码
                     //System.out.println(doc);
                     // 通过浏览器查看商品页面的源代码，找到信息所在的div标签，再对其进行一步一步地解析
-                    Element item = doc.select("div[class='tb-wrap']").get(0);
+//                    Element item = doc.select("div[class='tb-wrap']").get(0);
                     //Elements liList = ulList.select("div[class='product']");
                     // 循环liList的数据（具体获取的数据值还得看doc的页面源代码来获取，可能稍有变动）
                     //System.out.println("item = " + item);
+                    Elements info = doc.select(".attributes").select("li");
                     GoodsInfo goodsInfo = new GoodsInfo();
-                    //for (Element item : ulList) {
-                    // 商品ID
-                    try {
-                        goodsInfo.setGoodsId(number.toString());
-                        goodsInfo.setPlatForm("TMALL");
-                        //String id = item.select("div[class='tb-detail-hd']").select("h1").attr("data-spm");
-                        String title = item.select("div[class='tb-detail-hd']").select("h1").text();
-                        goodsInfo.setGoodsName(title);
-                        goodsInfo.setLink(UrlConst.TMALL_PRODUCT_DETAIL + number);
-
-                        System.out.println("商品title：" + title);
-                        //String priceStr = item.select("div[class='tm-price-panel']").select("div[class='tm-promo-type']").select("span[class='tm-price']").text();
-
-                        return goodsInfo;
-                    } catch (Exception e) {
-                        return null;
+                    Map<String, String> mp = new HashMap<>();
+                    for (Element opt : info) {
+                        String li = opt.text();
+                        String k = li.split(":")[0].trim();
+                        String v = li.split(":")[1].trim();
+                        mp.put(k, v);
+//                        System.out.println(li);
                     }
-                    // }
+                    JSONArray jsonObject = JSONArray.fromObject(mp);
+                    System.out.println(jsonObject.toString());
+//                    goodsInfo.setGoodsId(number.toString());
+                    return jsonObject.toString();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -182,7 +175,8 @@ public class TbDataCraw {
         return null;
     }
 
-    public void main(String[] args) {
-        this.soupTMALLGoodsListByKey("airpods2");
+    public static void main(String[] args) {
+        TbDataCraw tbDataCraw = new TbDataCraw();
+        tbDataCraw.soupTmallDetailById("546053281413");
     }
 }

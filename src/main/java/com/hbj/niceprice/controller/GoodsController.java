@@ -1,5 +1,6 @@
 package com.hbj.niceprice.controller;
 
+import com.hbj.niceprice.dao.TbDataCraw;
 import com.hbj.niceprice.entity.GoodsInfo;
 import com.hbj.niceprice.service.Flink2GoodsInfoService;
 import com.hbj.niceprice.service.GoodsInfoService;
@@ -31,7 +32,7 @@ public class GoodsController {
     @RequestMapping("/getGoodsList")
     public Map<String, Object> getGoodsList() {
         Map<String, Object> rs = new HashMap<>();
-        List<String> key = KafkaUtil.readKeywordBytxt("/Users/xwj/IdeaProjects/NicePrice/src/main/resources/data/keyword.txt");
+        List<String> key = KafkaUtil.readKeywordBytxt("src/main/resources/data/keyword.txt");
 //        List<GoodsInfo> list = goodsInfoService.selectAll();
         for (String keyword : key) {
             List<GoodsInfo> list = goodsInfoService.selectByVariety(keyword.split("_")[0], 0, 8);
@@ -41,20 +42,28 @@ public class GoodsController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getListByVariety",method = POST)
-    public List<?> getListByVariety(String variety){
+    @RequestMapping(value = "/getListByVariety", method = POST)
+    public List<?> getListByVariety(String variety) {
 
         return goodsInfoService.getListByVariety(variety);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getDoodDetail", method = GET)
-    public GoodsInfo getGoodDetail(String id) {
-        return goodsInfoService.findById(id);
+    @RequestMapping(value = "/getGoodsDetailById", method = POST)
+    public GoodsInfo getGoodDetail(String goodsId) {
+        GoodsInfo info = goodsInfoService.findById(goodsId);
+        if (info.getDetail().equals("详情")) {
+            TbDataCraw tbDataCraw = new TbDataCraw();
+            String detail = tbDataCraw.soupTmallDetailById(info.getGoodsId());
+            goodsInfoService.updateGoodsDetailById(goodsId, detail);
+            info.setDetail(detail);
+        }
+        return info;
     }
 
+
     @RequestMapping(value = "/crawTbGoodsInfo", method = GET)
-    public void crawTbGoodsInfo(String keyword) throws Exception {
+    public String crawTbGoodsInfo(String keyword) throws Exception {
 
         String topicName = "crawTbGoodsInfo";
         Flink2GoodsInfoService fgs = new Flink2GoodsInfoService(topicName);
@@ -65,6 +74,7 @@ public class GoodsController {
 
         Thread t = new Thread(fgs);
         t.start();
+        return "爬取数据完成";
     }
 
 }

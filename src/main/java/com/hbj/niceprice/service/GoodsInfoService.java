@@ -17,8 +17,8 @@ public class GoodsInfoService {
         return goodsInfoMapper.selectAll();
     }
 
-    public GoodsInfo findById(String id) {
-        return goodsInfoMapper.findById(id);
+    public GoodsInfo findById(String goodsId) {
+        return goodsInfoMapper.findById(goodsId);
     }
 
     public List<GoodsInfo> selectByVariety(String variety, Integer page, Integer size) {
@@ -29,4 +29,7 @@ public class GoodsInfoService {
         return goodsInfoMapper.getListByVariety(variety);
     }
 
+    public void updateGoodsDetailById(String goodsId, String detail) {
+        goodsInfoMapper.updateGoodsDetailById(goodsId, detail);
+    }
 }
