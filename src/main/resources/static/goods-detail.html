@@ -11,6 +11,16 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
+    <style type="text/css">
+        .tag{
+            background-color: #e97740;
+            border-radius: 3px;
+            padding: 3px 5px 3px 5px;
+            color: #fcfcfc;
+            font-size: 13px;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -163,9 +173,26 @@
             <hr>
             <div>
                 <h4>商品详情</h4>
-                <p>什么值得买是一家中立的消费门户网站，好价信息来自热心值友爆料和商家自荐，
-                    经小编人工审核或小值机器人智能判断后发布。促销折扣可能随时变
-                    化，请值友们购买前注意核实。</p>
+                <div class="row clearfix" id="goodsDetail">
+                    <div class="col-md-4 column">
+                        <span class="tag">机芯类型</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">型号</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">表扣款式</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">表盘直径</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">上市时间</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">手表镜面材质</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">附加功能</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">颜色分类</span>&nbsp;<label>pppp</label><br>
+                        <span class="label label-danger">流行元素</span><label>pppp</label><br>
+
+                    </div>
+                    <div class="col-md-4 column">
+
+                    </div>
+                    <div class="col-md-4 column">
+
+                    </div>
+                </div>
             </div>
             <hr>
             <div>
@@ -480,6 +507,8 @@
 </script>
 <script type="text/javascript">
     function getGoodsDetailById(id) {
+        let goodsDetail=$("#goodsDetail");
+        goodsDetail.empty();
         $.ajax({
             type: "POST",
             url: "/hbj/getGoodsDetailById",
@@ -489,9 +518,19 @@
             dataType: "json",
             success: function (data) {
                 let detail = JSON.parse(data.detail)[0];
+                let div='<div class="col-md-4 column">';
+                let div_1='</div>'
+                let content='';
+                let i=0;
+
                 for (let key in detail) {
+                    content+=div;
                     console.log(key + " " + detail[key]);
+                    content+='<span class="tag">'+key+'</span>&nbsp;<label>'+detail[key]+'</label><br>';
+                    content+=div_1;
+
                 }
+                goodsDetail.append(content);
             }
         })
     }
