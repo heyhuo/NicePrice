@@ -12,7 +12,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
     <style type="text/css">
-        .tag{
+        .tag {
             background-color: #e97740;
             border-radius: 3px;
             padding: 3px 5px 3px 5px;
@@ -174,24 +174,9 @@
             <div>
                 <h4>商品详情</h4>
                 <div class="row clearfix" id="goodsDetail">
-                    <div class="col-md-4 column">
-                        <span class="tag">机芯类型</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">型号</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">表扣款式</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">表盘直径</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">上市时间</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">手表镜面材质</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">附加功能</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">颜色分类</span>&nbsp;<label>pppp</label><br>
-                        <span class="label label-danger">流行元素</span><label>pppp</label><br>
-
-                    </div>
-                    <div class="col-md-4 column">
-
-                    </div>
-                    <div class="col-md-4 column">
-
-                    </div>
+                    <div class="col-md-4 column detail" id="detail1"></div>
+                    <div class="col-md-4 column detail" id="detail2"></div>
+                    <div class="col-md-4 column detail" id="detail3"></div>
                 </div>
             </div>
             <hr>
@@ -506,9 +491,16 @@
     })
 </script>
 <script type="text/javascript">
+    function subText(str) {
+        if (str == null) return;
+        if (str.length > 20) {
+            str = str.substr(0, 20) + "...";
+        }
+        return str;
+    }
+
     function getGoodsDetailById(id) {
-        let goodsDetail=$("#goodsDetail");
-        goodsDetail.empty();
+        $(".detail").empty();
         $.ajax({
             type: "POST",
             url: "/hbj/getGoodsDetailById",
@@ -518,19 +510,13 @@
             dataType: "json",
             success: function (data) {
                 let detail = JSON.parse(data.detail)[0];
-                let div='<div class="col-md-4 column">';
-                let div_1='</div>'
-                let content='';
-                let i=0;
-
+                let content1 = '';
+                let content2 = '';
+                let content3 = '';
+                let i = 0;
                 for (let key in detail) {
-                    content+=div;
-                    console.log(key + " " + detail[key]);
-                    content+='<span class="tag">'+key+'</span>&nbsp;<label>'+detail[key]+'</label><br>';
-                    content+=div_1;
-
+                    $("#detail" + ((i++ % 3) + 1)).append('<span class="tag">' + key + '</span>&nbsp;<label>' + subText(detail[key]) + '</label><br>');
                 }
-                goodsDetail.append(content);
             }
         })
     }
