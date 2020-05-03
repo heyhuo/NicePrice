@@ -9,5 +9,5 @@ public class UrlConst {
     String TAOBAO_PRODUCT_DETAIL = "https://item.taobao.com/item.htm?id=";
     String JD_PRODUCT_DETAIL = "https://item.jd.com/";
     static String keywordUrl = "/Users/huoshan/IdeaProjects/NicePrice/src/main/resources/data/keyword.txt";
-    static String keywordUrl2 = "";
+    static String keywordUrl2 = "/Users/xwj/IdeaProjects/NicePrice/src/main/resources/data/keyword.txt";
 }
