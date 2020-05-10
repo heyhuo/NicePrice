@@ -11,6 +11,9 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
+    <!--引入echarts-->
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/echarts/3.4.0/echarts.min.js "></script>
+
     <style type="text/css">
         .tag {
             background-color: #e97740;
@@ -23,6 +26,13 @@
         label {
             font-weight: normal;
         }
+        a:link{color:black;}
+
+        a:visited{color:#ccc;}
+
+        a:hover{color:blue;}
+
+        a:active{color:#ccc;}
 
     </style>
 
@@ -134,6 +144,7 @@
                             <p>淘宝</p>
                         </div>
                         <div class="col-md-7 column" id="nowLink">
+
                             <!--点击跳转至购买链接-->
                         </div>
                     </div>
@@ -163,210 +174,6 @@
             <div>
                 <h4>历史价格</h4>
                 <p>历史价格折线图（echart）</p>
-            </div>
-            <hr>
-            <div>
-                <h4>各大平台</h4>
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>
-                            卖家
-                        </th>
-                        <th>
-                            详情和特别优惠
-                        </th>
-                        <th>
-                            商品价格
-                        </th>
-                        <th>
-                            历史价格
-                        </th>
-                        <th>
-                            链接
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            拼多多
-                        </td>
-                        <td>
-                            包邮、七天无理由
-                        </td>
-                        <td>
-                            ￥188
-                        </td>
-                        <td>
-                            <a id="modal-489387" href="#modal-container-489387" role="button" class="btn"
-                               data-toggle="modal">点击查看</a>
-
-                            <div class="modal fade" id="modal-container-489387" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                ×
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                标题
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            内容...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                                            </button>
-                                            <button type="button" class="btn btn-primary">保存</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            <a href="">访问网站</a>
-                        </td>
-                    </tr>
-                    <tr class="danger">
-                        <td>
-                            淘宝
-                        </td>
-                        <td>
-                            包邮、运费险
-                        </td>
-                        <td>
-                            ￥198
-                        </td>
-                        <td>
-                            <a id="modal-804479" href="#modal-container-804479" role="button" class="btn"
-                               data-toggle="modal">点击查看</a>
-
-                            <div class="modal fade" id="modal-container-804479" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                ×
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                标题
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            内容...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                                            </button>
-                                            <button type="button" class="btn btn-primary">保存</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            <a href="">访问网站</a>
-                        </td>
-                    </tr>
-                    <tr class="error">
-                        <td>
-                            京东
-                        </td>
-                        <td>
-                            满88包邮、退货包运费
-                        </td>
-                        <td>
-                            ￥208
-                        </td>
-                        <td>
-                            <a id="modal-224238" href="#modal-container-224238" role="button" class="btn"
-                               data-toggle="modal">点击查看</a>
-
-                            <div class="modal fade" id="modal-container-224238" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                ×
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                标题
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            内容...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                                            </button>
-                                            <button type="button" class="btn btn-primary">保存</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            <a href="">访问网站</a>
-                        </td>
-                    </tr>
-                    <tr class="danger">
-                        <td>
-                            苏宁易购
-                        </td>
-                        <td>
-                            包邮、运费险
-                        </td>
-                        <td>
-                            ￥198
-                        </td>
-                        <td>
-                            <a id="modal-706670" href="#modal-container-706670" role="button" class="btn"
-                               data-toggle="modal">点击查看</a>
-
-                            <div class="modal fade" id="modal-container-706670" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                                ×
-                                            </button>
-                                            <h4 class="modal-title" id="myModalLabel">
-                                                标题
-                                            </h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            内容...
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
-                                            </button>
-                                            <button type="button" class="btn btn-primary">保存</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </td>
-                        <td>
-                            <a href="">访问网站</a>
-                        </td>
-                    </tr>
-
-                    </tbody>
-                </table>
             </div>
             <hr>
             <div>
@@ -484,11 +291,14 @@
             success: function (data) {
 
                 let goods_Pic='<img alt="140x140" src="'+data.picAddress+'" class="img-thumbnail" />';
-                let now_Link='<a target="_blank" href="'+data.link+'">点击跳转至链接</a>';
+
+            // <button type="button" class="btn btn-lg btn-danger"><a>直达链接></a></button>
+
+                let now_Link='<button type="button" class="btn btn-lg btn-danger"><a target="_blank" href="'+data.link+'">直达链接></a></button>';
                 $("#goodsPic").append(goods_Pic);
                 $("#crawTime").text(data.crawDate);
                 $("#goodsName").text(data.goodsName);
-                $("#goodsPrice").text(data.price)
+                $("#goodsPrice").text('￥'+data.price)
                 $("#nowLink").append(now_Link);
                 let detail = JSON.parse(data.detail)[0];
                 let i = 0;

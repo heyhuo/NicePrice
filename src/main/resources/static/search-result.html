@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+    <style type="text/css">
+        .tag {
+            background-color: #e97740;
+            border-radius: 3px;
+            padding: 3px 5px 3px 5px;
+            color: #fcfcfc;
+            font-size: 13px;
+        }
+
+        label {
+            font-weight: normal;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+                <div class="col-md-1 column">
+                    <br>
+                    <img alt="140x140" height="70" weight="70" src="img/logo.png" class="img-circle" id="logoHome"/>
+                    <br>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <br><br>
+                            <a href="#">电子设备</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">家用电器</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">家居家纺</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">运动户外</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">美妆个护</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">婴儿用品</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">生鲜酒水</a>
+                        </li>
+                        <li>
+                            <br><br>
+                            <a href="#">图书文娱</a>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <br><br>
+                        <div class="input-group" input-group-lg>
+                            <input type="text" class="form-control">
+                            <span class="input-group-btn">
+                            <button class="btn btn-default " type="button">搜索</button>
+                        </span>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav navbar-right">
+                        <br><br>
+                        <li>
+                            <a href="#" style="color: darkred">登录 | 注册 &nbsp;</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+<br><br><br><br>
+
+
+
+<div class="row clearfix">
+    <div class="col-md-1 column"></div>
+    <div class="col-md-10 column">
+        <!--价格过滤选择栏-->
+        <div class="col-md-12 column">
+            <!--价格高低-->
+            <div class="col-md-4 column">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-default" type="button">默认排序</button>
+                    <button class="btn btn-default" type="button"> <svg class="bi bi-arrow-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4.646 9.646a.5.5 0 0 1 .708 0L8 12.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M8 2.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V3a.5.5 0 0 1 .5-.5z" clip-rule="evenodd"/>
+                    </svg>价格降序</button>
+                    <button class="btn btn-default" type="button"><svg class="bi bi-arrow-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8 3.707 5.354 6.354a.5.5 0 1 1-.708-.708l3-3z" clip-rule="evenodd"/>
+                    </svg>价格升序</button>
+                </div>
+            </div>
+            <!--价格区间-->
+            <div class="col-md-6 column">
+                <!--<ul class="pagination pagination-sm">-->
+                <!--<li>-->
+                <!--<a href="#" style="color: black">价格</a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<a href="#"><input type="text" size="5sp">——<input type="text" size="5sp"></a>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<a href="#">确定</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+
+                <div class="row clearfix">
+                    <div class="col-md-2 column">
+                        <p>价格</p>
+                    </div>
+                    <div class="col-md-4 column">
+                        <input type="text" size="5sp">——<input type="text" size="5sp">
+                    </div>
+                    <div class="col-md-5 column">
+                        <button>确定</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 column">
+                <div class="checkbox">
+                    <label><input type="checkbox" />只看自营/旗舰店</label>
+                </div>
+            </div>
+        </div>
+        <br><br><br><br>
+        <!--商品显示栏-->
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <img alt="120x120" src="img/test.png" />
+            </div>
+            <div class="col-md-5 column">
+                <a><h4>OPPO Reno Ace 智能手机 8GB+128GB</h4></a>
+                <br>
+                <p>01-31 18:36 京东商城(自营)</p>
+            </div>
+            <div class="col-md-2 column">
+                <h4 style="color:red">
+                    ￥2599
+                </h4>
+            </div>
+            <div class="col-md-3 column">
+
+                <h4>
+                    <svg class="bi bi-graph-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
+                        <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 9.854a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v3.5h-3.5a.5.5 0 0 0-.5.5z" clip-rule="evenodd"/>
+                    </svg>价格走势
+                </h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <img alt="140x140" src="img/test.png" />
+            </div>
+            <div class="col-md-5 column">
+                <a><h4>OPPO Reno Ace 智能手机 8GB+128GB</h4></a>
+                <br>
+                <p>01-29 18:36 京东商城(第三方)</p>
+            </div>
+            <div class="col-md-2 column">
+                <h4 style="color:red">
+                    ￥2499
+                </h4>
+            </div>
+            <div class="col-md-3 column">
+
+                <h4>
+                    <svg class="bi bi-graph-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
+                        <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 9.854a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v3.5h-3.5a.5.5 0 0 0-.5.5z" clip-rule="evenodd"/>
+                    </svg>价格走势
+                </h4>
+            </div>
+        </div>
+        <hr>
+        <div class="row clearfix">
+            <div class="col-md-2 column">
+                <img alt="140x140" src="img/test.png" />
+            </div>
+            <div class="col-md-5 column">
+                <a><h4>OPPO Reno Ace 智能手机 8GB+128GB</h4></a>
+                <br>
+                <p>02-31 18:36 淘宝(自营)</p>
+            </div>
+            <div class="col-md-2 column">
+                <h4 style="color:red">
+                    ￥2599
+                </h4>
+            </div>
+            <div class="col-md-3 column">
+
+                <h4>
+                    <svg class="bi bi-graph-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0h1v16H0V0zm1 15h15v1H1v-1z"/>
+                        <path fill-rule="evenodd" d="M14.39 9.041l-4.349-5.436L7 6.646 3.354 3l-.708.707L7 8.061l2.959-2.959 3.65 4.564.781-.625z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M10 9.854a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v3.5h-3.5a.5.5 0 0 0-.5.5z" clip-rule="evenodd"/>
+                    </svg>价格走势
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1 column"></div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="row clearfix">
+                <!--图片-->
+                <div class="col-md-4 column" id="goodsPic"></div>
+                <div class="col-md-8 column">
+                    <!--商品名称-->
+                    <h3 id="goodsName">
+                        Nike Pitch TEAM 训练足球
+                    </h3>
+                    <!--现在价格-->
+                    <div class="row clearfix">
+                        <div class="col-md-5 column">
+                            <!--现在价格-->
+                            <h3 id="goodsPrice" style="color:red;">￥178.00</h3>
+                        </div>
+                        <div class="col-md-7 column">
+                            <br>
+                            <!--原价格-->
+                            <!--<s>￥原价格.00</s>-->
+                        </div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <div class="col-md-2 column">
+                            <p><span class="glyphicon glyphicon-star-empty"></span>星级评论</p>
+                        </div>
+                        <div class="col-md-10 column">
+                            <a>我要评价</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <h4>商品详情</h4>
+                        <div class="row clearfix">
+                            <div class="col-md-4 column detail" id="detail1"></div>
+                            <div class="col-md-4 column detail" id="detail2"></div>
+                            <div class="col-md-4 column detail" id="detail3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div>
+                <h4>全网比价</h4>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>
+                            电商平台
+                        </th>
+                        <th>
+                            店铺
+                        </th>
+                        <th>
+                            商品价格
+                        </th>
+                        <th>
+                            历史价格
+                        </th>
+                        <th>
+                            链接
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            拼多多
+                        </td>
+                        <td>
+                            耐克官方旗舰店
+                        </td>
+                        <td>
+                            ￥149
+                        </td>
+                        <td>
+                            <a id="modal-489387" href="#modal-container-489387" role="button" class="btn"
+                               data-toggle="modal">点击查看</a>
+
+                            <div class="modal fade" id="modal-container-489387" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                标题
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            内容...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary">保存</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            <a href="">访问网站</a>
+                        </td>
+                    </tr>
+                    <tr class="danger">
+                        <td>
+                            淘宝
+                        </td>
+                        <td>
+                            耐克官方旗舰店
+                        </td>
+                        <td>
+                            ￥198
+                        </td>
+                        <td>
+                            <a id="modal-804479" href="#modal-container-804479" role="button" class="btn"
+                               data-toggle="modal">点击查看</a>
+
+                            <div class="modal fade" id="modal-container-804479" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                标题
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            内容...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary">保存</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            <a href="">访问网站</a>
+                        </td>
+                    </tr>
+                    <tr class="error">
+                        <td>
+                            京东
+                        </td>
+                        <td>
+                            滔博海外代购
+                        </td>
+                        <td>
+                            ￥208
+                        </td>
+                        <td>
+                            <a id="modal-224238" href="#modal-container-224238" role="button" class="btn"
+                               data-toggle="modal">点击查看</a>
+
+                            <div class="modal fade" id="modal-container-224238" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                标题
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            内容...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary">保存</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            <a href="">访问网站</a>
+                        </td>
+                    </tr>
+                    <tr class="danger">
+                        <td>
+                            拼多多
+                        </td>
+                        <td>
+                            欣欣海外代购店
+                        </td>
+                        <td>
+                            ￥198
+                        </td>
+                        <td>
+                            <a id="modal-706670" href="#modal-container-706670" role="button" class="btn"
+                               data-toggle="modal">点击查看</a>
+
+                            <div class="modal fade" id="modal-container-706670" role="dialog"
+                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                标题
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            内容...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button" class="btn btn-primary">保存</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </td>
+                        <td>
+                            <a href="">访问网站</a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div>
+                <h4>您可能还喜欢</h4>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img alt="300x200" src="img/zhangpeng.jpg"/>
+                            <div class="caption">
+                                <div class="row clearfix">
+                                    <div class="col-md-5 column">
+                                        <h3>￥178.00</h3>
+                                    </div>
+                                    <div class="col-md-7 column">
+                                        <br>
+                                        <s>￥188.00</s>
+                                    </div>
+                                </div>
+                                <a href="">
+                                    北极狼 BeiJiLang 全自动帐篷户外...
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img alt="300x200" src="img/zuqiu.jpg"/>
+                            <div class="caption">
+                                <div class="row clearfix">
+                                    <div class="col-md-5 column">
+                                        <h3>￥145.00</h3>
+                                    </div>
+                                    <div class="col-md-7 column">
+                                        <br>
+                                        <s>￥198.00</s>
+                                    </div>
+                                </div>
+                                <a href="">
+                                    耐克（Nike）5号足球标准成人比赛...
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img alt="300x200" src="img/lanqiu.jpg"/>
+                            <div class="caption">
+                                <div class="caption">
+                                    <div class="row clearfix">
+                                        <div class="col-md-5 column">
+                                            <h3>￥98.00</h3>
+                                        </div>
+                                        <div class="col-md-7 column">
+                                            <br>
+                                            <s>￥178.00</s>
+                                        </div>
+                                    </div>
+                                    <a href="">
+                                        斯伯丁Spalding NBA比赛篮球室...
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <img alt="300x200" src="img/yaobao.jpg"/>
+                            <div class="caption">
+                                <div class="row clearfix">
+                                    <div class="col-md-5 column">
+                                        <h3>￥39.00</h3>
+                                    </div>
+                                    <div class="col-md-7 column">
+                                        <br>
+                                        <s>￥59.00</s>
+                                    </div>
+                                </div>
+                                <a href="#">
+                                    加加林 运动跑步腰包多功能腰带 防...
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        let urlParam = decodeURI(getUrlParam("id"));
+        console.log("urlParam " + urlParam);
+        getGoodsDetailById(urlParam);
+    })
+</script>
+<script type="text/javascript">
+    function subText(str) {
+        if (str == null) return;
+        if (str.length > 20) {
+            str = str.substr(0, 20) + "...";
+        }
+        return str;
+    }
+
+    function getGoodsDetailById(id) {
+        $(".detail").empty();
+        $.ajax({
+            type: "POST",
+            url: "/hbj/getGoodsDetailById",
+            data: {
+                goodsId: id
+            },
+            dataType: "json",
+            success: function (data) {
+
+                let goods_Pic='<img alt="140x140" src="'+data.picAddress+'" class="img-thumbnail" />';
+                let now_Link='<a target="_blank" href="'+data.link+'">点击跳转至链接</a>';
+                $("#goodsPic").append(goods_Pic);
+                $("#crawTime").text(data.crawDate);
+                $("#goodsName").text(data.goodsName);
+                $("#goodsPrice").text('￥'+data.price);
+                $("#nowLink").append(now_Link);
+                let detail = JSON.parse(data.detail)[0];
+                let i = 0;
+                for (let key in detail) {
+                    $("#detail" + ((i++ % 3) + 1)).append('<span class="tag">' + key + '</span>&nbsp;<label>' + subText(detail[key]) + '</label><br>');
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -66,7 +66,7 @@ public class KafkaUtil implements Runnable {
         List<String> list = new ArrayList<String>();
         InputStreamReader isr;
         try {
-            isr = new InputStreamReader(new FileInputStream(UrlConst.keywordUrl), "utf-8");
+            isr = new InputStreamReader(new FileInputStream(UrlConst.keywordUrl2), "utf-8");
             BufferedReader read = new BufferedReader(isr);
             String s = null;
             while ((s = read.readLine()) != null) {
