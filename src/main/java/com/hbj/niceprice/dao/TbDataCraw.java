@@ -2,9 +2,7 @@ package com.hbj.niceprice.dao;
 
 import com.hbj.niceprice.entity.GoodsInfo;
 
-import com.hbj.niceprice.util.UrlConst;
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 import org.apache.http.Consts;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,16 +15,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TbDataCraw {
 
     public Map<String, String> parseTag(Document doc) {
-        String variety = doc.select(".crumbSearch-input").attr("value");
-        Elements tagList = doc.select(".navAttrsForm").select("li");
+        String variety = doc.select(".attrKey").select("a").text();
+        Elements tagList = doc.select(".av-expand").select("li");
         List<String> tags = new ArrayList<>();
         for (Element item : tagList) {
             tags.add(item.select("a").attr("title"));
@@ -89,7 +84,13 @@ public class TbDataCraw {
 
                         // 商品网址
                         String goodsUrl = item.select(".productTitle").select("a").attr("href");
-
+                        // 月销量
+                        String monthSale = item.select(".productStatus").select("em").text();
+                        monthSale = monthSale.isEmpty() ? "0" : monthSale.substring(0, monthSale.length() - 1);
+                        // 评论数
+                        String commentNum = item.select(".productStatus").select("a").text();
+                        commentNum = commentNum.isEmpty() ? "0" : commentNum;
+                        System.out.println("mon=" + monthSale + ",com=" + commentNum);
                         // 商品图片网址
                         String imgUrl = "";
                         Elements img = item.select(".productImg-wrap").select("img");
@@ -100,7 +101,10 @@ public class TbDataCraw {
 //                            System.out.println(img.toString());
                         }
                         String https = "https:";
-                        GoodsInfo goodsInfo = new GoodsInfo(id, name.toString(), price, variety, tag, "详情", https + imgUrl, https + goodsUrl, "TMALL", "0");
+                        GoodsInfo goodsInfo = new GoodsInfo(id, name.toString(), price,
+                                keyword + "_" + variety, tag, "详情",
+                                https + imgUrl, https + goodsUrl,
+                                "TMALL", "0", dealWan(monthSale), dealWan(commentNum));
 //
                         resultList.add(goodsInfo);
 //                        System.out.println(goodsInfo.toString());
@@ -126,6 +130,8 @@ public class TbDataCraw {
         try {
             // 需要爬取商品信息的网站地址
             String url = "https://chaoshi.detail.tmall.com/item.htm?id=" + number;
+//            String url = "https://mdskip.taobao.com/core/initItemDetail.htm?isUseInventoryCenter=false&cartEnable=true&service3C=false&isApparel=false&isSecKill=false&tmallBuySupport=true&isAreaSell=false&tryBeforeBuy=false&offlineShop=false&itemId=35284240234&showShopProm=false&isPurchaseMallPage=false&itemGmtModified=1588700237000&isRegionLevel=false&household=false&sellerPreview=false&queryMemberRight=true&addressLevel=2&isForbidBuyItem=false";
+            System.out.println(url);
             // 动态模拟请求数据
             CloseableHttpClient httpclient = HttpClients.createDefault();
             HttpGet httpGet = new HttpGet(url);
@@ -143,40 +149,57 @@ public class TbDataCraw {
                     Document doc = null;
                     // doc获取整个页面的所有数据
                     doc = Jsoup.parse(html);
-                    //输出doc可以看到所获取到的页面源代码
-                    //System.out.println(doc);
-                    // 通过浏览器查看商品页面的源代码，找到信息所在的div标签，再对其进行一步一步地解析
-//                    Element item = doc.select("div[class='tb-wrap']").get(0);
-                    //Elements liList = ulList.select("div[class='product']");
-                    // 循环liList的数据（具体获取的数据值还得看doc的页面源代码来获取，可能稍有变动）
-                    //System.out.println("item = " + item);
-                    Elements info = doc.select(".attributes").select("li");
-                    GoodsInfo goodsInfo = new GoodsInfo();
-                    Map<String, String> mp = new HashMap<>();
-                    for (Element opt : info) {
-                        String li = opt.text();
-                        String k = li.split(":")[0].trim();
-                        String v = li.split(":")[1].trim();
-                        mp.put(k, v);
-//                        System.out.println(li);
-                    }
-                    JSONArray jsonObject = JSONArray.fromObject(mp);
-                    System.out.println(jsonObject.toString());
-//                    goodsInfo.setGoodsId(number.toString());
-                    return jsonObject.toString();
+                    //获取商品详情
+                    String deatil = getDeatil(doc);
+                    //获取商品价格
+                    String price = doc.select(".tm-price").text();
+                    System.out.println(price);
+                    return deatil;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                return null;
+                return "详情";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return "详情";
     }
 
-    public static void main(String[] args) {
+    public String dealWan(String s) {
+        int length = s.length();
+        if (s.length() == 0) return s;
+        if ("万".equals(s.substring(length - 1, length))) {
+            Double mon = Double.valueOf(s.substring(0, length - 1)) * 10000;
+            return mon.toString();
+        }
+        return s;
+    }
+
+    private String getDeatil(Document doc) {
+        Elements info = doc.select("#J_AttrUL").select("li");
+        Map<String, String> mp = new HashMap<>();
+        for (Element opt : info) {
+            String li = opt.text();
+            String reg = "";
+            if (li.contains(":")) {
+                reg = ":";
+            } else if (li.contains("：")) {
+                reg = "：";
+            }
+            String k = li.split(reg)[0].trim();
+            String v = li.split(reg)[1].trim();
+            mp.put(k, v);
+        }
+        JSONArray jsonObject = JSONArray.fromObject(mp);
+        System.out.println(jsonObject.toString());
+        return jsonObject.toString();
+    }
+
+    public static void main(String[] args) throws InterruptedException {
         TbDataCraw tbDataCraw = new TbDataCraw();
-        tbDataCraw.soupTmallDetailById("546053281413");
+//        String s = tbDataCraw.soupTmallDetailById("38235209262");
+        List<GoodsInfo> s = tbDataCraw.soupTMALLGoodsListByKey("美妆个护");
+        System.out.println(s);
     }
 }

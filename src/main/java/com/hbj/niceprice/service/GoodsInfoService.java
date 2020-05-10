@@ -32,4 +32,8 @@ public class GoodsInfoService {
     public void updateGoodsDetailById(String goodsId, String detail) {
         goodsInfoMapper.updateGoodsDetailById(goodsId, detail);
     }
+
+    public List<?> selectPriceById(String goodsId) {
+        return goodsInfoMapper.selectPriceById(goodsId);
+    }
 }

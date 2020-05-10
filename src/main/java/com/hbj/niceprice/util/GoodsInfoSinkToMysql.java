@@ -25,8 +25,8 @@ public class GoodsInfoSinkToMysql extends RichSinkFunction<GoodsInfo> {
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
         connection = getConnection();
-        String sql = "insert into goods_info(goods_id, goods_name, price, variety,tag,detail,pic_address,link,plat_form,craw_date) values(?, ?, ?,?, ?,?, ?, ?, ?,?)" +
-                "on duplicate key update price=?,tag=?,craw_date=?;";
+        String sql = "insert into goods_info(goods_id, goods_name, price, variety,tag,detail,pic_address,link,plat_form,craw_date,month_sale,comment_num) values(?, ?, ?,?, ?,?, ?, ?,?, ?, ?,?)" +
+                "on duplicate key update craw_date=?;";
         ps = this.connection.prepareStatement(sql);
 //        try {
 //            goodsInfoMapper = GoodsInfoDao.getInstance();
@@ -56,8 +56,8 @@ public class GoodsInfoSinkToMysql extends RichSinkFunction<GoodsInfo> {
         ps.setString(8, value.getLink());
         ps.setString(9, value.getPlatForm());
         ps.setString(10, value.getCrawDate());
-        ps.setString(11, value.getPrice());
-        ps.setString(12, value.getTag());
+        ps.setString(11, value.getMonthSale());
+        ps.setString(12, value.getCommentNum());
         ps.setString(13, value.getCrawDate());
         ps.executeUpdate();
 //        GoodsInfo goodsInfo = new GoodsInfo(value.getGoodsId(),

@@ -7,24 +7,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GoodsInfo {
-    public String goodsId;
-    public String goodsName;
-    public String price;
-    public String variety;
-    public String detail;
-    public String picAddress;
-    public String link;
-    public String platForm;
-    public String aveComment;
-    public String tag;
-    public String crawDate;
+    private String goodsId;
+    private String goodsName;
+    private String price;
+    private String variety;
+    private String monthSale;
+    private String commentNum;
+    private String detail;
+    private String picAddress;
+    private String link;
+    private String platForm;
+    private String aveComment;
+    private String tag;
+    private String crawDate;
     SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     public GoodsInfo() {
     }
 
     public GoodsInfo(String goodsId, String goodsName, String price, String variety, String tag, String detail,
-                     String picAddress, String link, String platForm, String aveComment) {
+                     String picAddress, String link, String platForm, String aveComment, String monthSale, String commentNum) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.price = price;
@@ -35,8 +37,27 @@ public class GoodsInfo {
         this.link = link;
         this.platForm = platForm;
         this.aveComment = aveComment;
+        this.commentNum = commentNum;
+        this.monthSale = monthSale;
 
         this.crawDate = ft.format(new Date());
+    }
+
+
+    public String getMonthSale() {
+        return monthSale;
+    }
+
+    public void setMonthSale(String monthSale) {
+        this.monthSale = monthSale;
+    }
+
+    public String getCommentNum() {
+        return commentNum;
+    }
+
+    public void setCommentNum(String commentNum) {
+        this.commentNum = commentNum;
     }
 
     public String getCrawDate() {
@@ -127,6 +148,23 @@ public class GoodsInfo {
         this.tag = tag;
     }
 
+    public GoodsInfo(String goodsId, String goodsName, String price, String variety, String monthSale, String commentNum, String detail, String picAddress, String link, String platForm, String aveComment, String tag, String crawDate, SimpleDateFormat ft) {
+        this.goodsId = goodsId;
+        this.goodsName = goodsName;
+        this.price = price;
+        this.variety = variety;
+        this.monthSale = monthSale;
+        this.commentNum = commentNum;
+        this.detail = detail;
+        this.picAddress = picAddress;
+        this.link = link;
+        this.platForm = platForm;
+        this.aveComment = aveComment;
+        this.tag = tag;
+        this.crawDate = crawDate;
+        this.ft = ft;
+    }
+
     @Override
     public String toString() {
         return "GoodsInfo{" +
@@ -134,13 +172,16 @@ public class GoodsInfo {
                 ", goodsName='" + goodsName + '\'' +
                 ", price='" + price + '\'' +
                 ", variety='" + variety + '\'' +
+                ", monthSale='" + monthSale + '\'' +
+                ", commentNum='" + commentNum + '\'' +
                 ", detail='" + detail + '\'' +
                 ", picAddress='" + picAddress + '\'' +
                 ", link='" + link + '\'' +
                 ", platForm='" + platForm + '\'' +
                 ", aveComment='" + aveComment + '\'' +
                 ", tag='" + tag + '\'' +
-                ", crawDate=" + crawDate +
+                ", crawDate='" + crawDate + '\'' +
+                ", ft=" + ft +
                 '}';
     }
 }

@@ -5,7 +5,6 @@ import com.hbj.niceprice.dao.TbDataCraw;
 import com.hbj.niceprice.entity.GoodsInfo;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -43,47 +42,50 @@ public class KafkaUtil implements Runnable {
 
     @Override
     public void run() {
-        List<String> list = readKeywordBytxt("src/main/resources/data/keyword.txt");
-        for (String keyword : list) {
-            keyword = keyword.split("_")[0];
-            System.out.println("------------" + keyword + "-----------");
-            List<GoodsInfo> goodsInfoList = tbDataCraw.soupTMALLGoodsListByKey(keyword);
-            int i = 0;
-            for (GoodsInfo g : goodsInfoList) {
+        List<GoodsInfo> goodsInfoList = new ArrayList<>();
+        if (keyword != null) {  //单类爬虫
+            goodsInfoList.addAll(tbDataCraw.soupTMALLGoodsListByKey(keyword));
+        } else {    //类别爬虫
+            for (Catalogs c : Catalogs.values()) {
+                keyword = c.toString().split("_")[0];
+                System.out.println("------------" + keyword + "-----------");
+                goodsInfoList.addAll(tbDataCraw.soupTMALLGoodsListByKey(keyword));
+            }
+        }
+        int i = 0;
+        for (GoodsInfo g : goodsInfoList) {
 //                String detail = tbDataCraw.soupTmallDetailById(g.getGoodsId());
 //                g.setDetail(detail);
-                i++;
-                System.out.println("序号-" + i + "  " + g.toString());
-                ProducerRecord record = new ProducerRecord(topic, null, null, JSON.toJSONString(g));
-                producer.send(record);
-            }
-            producer.flush();
+            i++;
+//            System.out.println("序号-" + i + "  " + g.toString());
+            ProducerRecord record = new ProducerRecord(topic, null, null, JSON.toJSONString(g));
+            producer.send(record);
         }
-
+        producer.flush();
     }
 
-    public static List<String> readKeywordBytxt(String pathname) {
-        List<String> list = new ArrayList<String>();
-        InputStreamReader isr;
-        try {
-            isr = new InputStreamReader(new FileInputStream(UrlConst.keywordUrl2), "utf-8");
-            BufferedReader read = new BufferedReader(isr);
-            String s = null;
-            while ((s = read.readLine()) != null) {
-                if (s.trim().length() > 1) {
-                    list.add(s.trim());
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return list;
-    }
+//    public static List<String> readKeywordBytxt(String pathname) {
+//        List<String> list = new ArrayList<String>();
+//        InputStreamReader isr;
+//        try {
+//            isr = new InputStreamReader(new FileInputStream(UrlConst.keywordUrl2), "utf-8");
+//            BufferedReader read = new BufferedReader(isr);
+//            String s = null;
+//            while ((s = read.readLine()) != null) {
+//                if (s.trim().length() > 1) {
+//                    list.add(s.trim());
+//                }
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
 
     public static void main(String[] args) {
-//        KafkaUtil kafkaUtil = new KafkaUtil("test");
-//        Thread thread = new Thread(kafkaUtil);
-//        thread.start();
-        readKeywordBytxt("");
+        KafkaUtil kafkaUtil = new KafkaUtil("test");
+        Thread thread = new Thread(kafkaUtil);
+        thread.start();
+//        readKeywordBytxt("");
     }
 }

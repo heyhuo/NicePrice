@@ -26,13 +26,22 @@
         label {
             font-weight: normal;
         }
-        a:link{color:black;}
 
-        a:visited{color:#ccc;}
+        a:link {
+            color: black;
+        }
 
-        a:hover{color:blue;}
+        a:visited {
+            color: #ccc;
+        }
 
-        a:active{color:#ccc;}
+        a:hover {
+            color: blue;
+        }
+
+        a:active {
+            color: #ccc;
+        }
 
     </style>
 
@@ -45,7 +54,7 @@
 
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
-                <div class="col-md-1 column">
+                <div class="col-md-1 column" onclick="window.open('home.html')">
                     <br>
                     <img alt="140x140" height="70" weight="70" src="img/logo.png" class="img-circle" id="logoHome"/>
                     <br>
@@ -173,7 +182,7 @@
             <hr>
             <div>
                 <h4>历史价格</h4>
-                <p>历史价格折线图（echart）</p>
+                <div id="price-div" style="width: 600px;height:400px;"></div>
             </div>
             <hr>
             <div>
@@ -279,6 +288,49 @@
         return str;
     }
 
+    function setPrice(priceList) {
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('price-div'));
+        // 时间列表
+        var dateList = priceList.map(function (item) {
+            return item.priceTime.split(' ')[0];
+        });
+        // 值列表
+        var valueList = priceList.map(function (item) {
+            return item.price;
+        });
+
+        option = {
+
+            title: {
+                left: 'center',
+                text: '历史价格'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                data: dateList
+            },
+            yAxis: {
+                splitLine: {show: false}
+            },
+            grid: [{
+                bottom: '60%'
+            }, {
+                top: '60%'
+            }],
+            series: {
+                type: 'line',
+                showSymbol: false,
+                data: valueList
+            }
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
     function getGoodsDetailById(id) {
         $(".detail").empty();
         $.ajax({
@@ -288,17 +340,18 @@
                 goodsId: id
             },
             dataType: "json",
-            success: function (data) {
+            success: function (rs) {
+                let data = rs.info;
+                let goods_Pic = '<img alt="140x140" src="' + data.picAddress + '" class="img-thumbnail" />';
 
-                let goods_Pic='<img alt="140x140" src="'+data.picAddress+'" class="img-thumbnail" />';
+                setPrice(rs.price);
+                // <button type="button" class="btn btn-lg btn-danger"><a>直达链接></a></button>
 
-            // <button type="button" class="btn btn-lg btn-danger"><a>直达链接></a></button>
-
-                let now_Link='<button type="button" class="btn btn-lg btn-danger"><a target="_blank" href="'+data.link+'">直达链接></a></button>';
+                let now_Link = '<button type="button" class="btn btn-lg btn-danger"><a target="_blank" href="' + data.link + '">直达链接></a></button>';
                 $("#goodsPic").append(goods_Pic);
                 $("#crawTime").text(data.crawDate);
                 $("#goodsName").text(data.goodsName);
-                $("#goodsPrice").text('￥'+data.price)
+                $("#goodsPrice").text('￥' + data.price)
                 $("#nowLink").append(now_Link);
                 let detail = JSON.parse(data.detail)[0];
                 let i = 0;

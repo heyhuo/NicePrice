@@ -20,4 +20,6 @@ public interface GoodsInfoMapper {
 
     void updateGoodsDetailById(String goodsId, String detail);
 
+    List<?> selectPriceById(String goodsId);
+
 }

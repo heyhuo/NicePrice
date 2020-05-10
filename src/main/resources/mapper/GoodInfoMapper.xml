@@ -18,21 +18,29 @@
     <select id="selectAll" resultType="GoodsInfo">
         select *
         from goods_info
+        order by month_sale desc
     </select>
 
     <select id="selectByVariety" resultType="GoodsInfo">
         select *
         from goods_info
-        where variety = #{variety}
-        order by craw_date desc
+        where variety like #{variety}
+        order by month_sale desc
         limit #{page},#{size}
     </select>
 
     <select id="getListByVariety" resultType="GoodsInfo">
         select *
         from goods_info
-        where variety = #{variety}
-        order by craw_date desc
+        where variety like #{variety}
+        order by month_sale desc
+    </select>
+
+    <select id="selectPriceById" resultType="PriceSave">
+        select price_time, price
+        from price_save
+        where goods_id = #{goodsId}
+        order by price_time
     </select>
 
     <update id="updateGoodsDetailById">
