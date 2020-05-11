@@ -1,19 +1,18 @@
-package com.hbj.niceprice.util;
+package com.hbj.niceprice.service.goodsInfo;
 
 import com.hbj.niceprice.entity.GoodsInfo;
 
+import com.hbj.niceprice.util.FlinkConnection;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class GoodsInfoSink extends RichSinkFunction<GoodsInfo> {
 
     PreparedStatement ps;
     private Connection connection;
-//    private GoodsInfoMapper goodsInfoMapper;
 
     /**
      * open() 方法中建立连接，这样不用每次 invoke 的时候都要建立连接和释放连接
@@ -24,9 +23,10 @@ public class GoodsInfoSink extends RichSinkFunction<GoodsInfo> {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        connection = getConnection();
-        String sql = "insert into goods_info(goods_id, goods_name, price, variety,tag,detail,pic_address,link,plat_form,craw_date,month_sale,comment_num) values(?, ?, ?,?, ?,?, ?, ?,?, ?, ?,?)" +
-                "on duplicate key update craw_date=?;";
+        connection = FlinkConnection.getConnection();
+        String sql = "INSERT INTO goods_info(goods_id, goods_name, price, variety,tag," +
+                "detail,pic_address,link,plat_form,craw_date,month_sale,comment_num) " +
+                "VALUES (?, ?, ?,?, ?,?, ?, ?,?, ?, ?,?) ON DUPLICATE KEY UPDATE craw_date=?;";
         ps = this.connection.prepareStatement(sql);
 //        try {
 //            goodsInfoMapper = GoodsInfoDao.getInstance();
@@ -56,8 +56,8 @@ public class GoodsInfoSink extends RichSinkFunction<GoodsInfo> {
         ps.setString(8, value.getLink());
         ps.setString(9, value.getPlatForm());
         ps.setString(10, value.getCrawDate());
-        ps.setString(11, value.getMonthSale());
-        ps.setString(12, value.getCommentNum());
+        ps.setInt(11, value.getMonthSale());
+        ps.setInt(12, value.getCommentNum());
         ps.setString(13, value.getCrawDate());
         ps.executeUpdate();
 //        GoodsInfo goodsInfo = new GoodsInfo(value.getGoodsId(),
@@ -69,17 +69,6 @@ public class GoodsInfoSink extends RichSinkFunction<GoodsInfo> {
 //        } catch (Exception e) {
 //            System.out.println(e);
 //        }
-    }
-
-    private Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/nice_price?useUnicode=true&characterEncoding=UTF-8", "root", "88888888");
-        } catch (Exception e) {
-            System.out.println("-----------mysql get connection has exception , msg = " + e.getMessage());
-        }
-        return connection;
     }
 
     @Override

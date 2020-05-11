@@ -1,4 +1,4 @@
-package com.hbj.niceprice.util;
+package com.hbj.niceprice.params;
 
 
 import org.springframework.util.StringUtils;

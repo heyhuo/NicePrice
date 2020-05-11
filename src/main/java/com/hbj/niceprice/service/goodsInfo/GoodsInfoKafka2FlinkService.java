@@ -1,8 +1,7 @@
-package com.hbj.niceprice.service;
+package com.hbj.niceprice.service.goodsInfo;
 
 import com.alibaba.fastjson.JSON;
 import com.hbj.niceprice.entity.GoodsInfo;
-import com.hbj.niceprice.util.GoodsInfoSink;
 import com.hbj.niceprice.util.KafkaUtil;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -11,13 +10,13 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 
 import java.util.Properties;
 
-public class Flink2GoodsInfoService implements Runnable {
+public class GoodsInfoKafka2FlinkService implements Runnable {
     final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
     KafkaUtil kafkaUtil;
     Properties prop;
     String topicName;
 
-    public Flink2GoodsInfoService(String topicName) {
+    public GoodsInfoKafka2FlinkService(String topicName) {
         this.kafkaUtil = new KafkaUtil(topicName);
         this.prop = kafkaUtil.getProps();
         this.topicName = kafkaUtil.getTopic();

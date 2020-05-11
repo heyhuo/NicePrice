@@ -1,8 +1,5 @@
 package com.hbj.niceprice.entity;
 
-import org.apache.flink.streaming.api.functions.source.SourceFunction;
-
-import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -11,8 +8,8 @@ public class GoodsInfo {
     private String goodsName;
     private String price;
     private String variety;
-    private String monthSale;
-    private String commentNum;
+    private int monthSale;
+    private int commentNum;
     private String detail;
     private String picAddress;
     private String link;
@@ -26,7 +23,7 @@ public class GoodsInfo {
     }
 
     public GoodsInfo(String goodsId, String goodsName, String price, String variety, String tag, String detail,
-                     String picAddress, String link, String platForm, String aveComment, String monthSale, String commentNum) {
+                     String picAddress, String link, String platForm, String aveComment, int monthSale, int commentNum) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.price = price;
@@ -44,19 +41,19 @@ public class GoodsInfo {
     }
 
 
-    public String getMonthSale() {
+    public int getMonthSale() {
         return monthSale;
     }
 
-    public void setMonthSale(String monthSale) {
+    public void setMonthSale(int monthSale) {
         this.monthSale = monthSale;
     }
 
-    public String getCommentNum() {
+    public int getCommentNum() {
         return commentNum;
     }
 
-    public void setCommentNum(String commentNum) {
+    public void setCommentNum(int commentNum) {
         this.commentNum = commentNum;
     }
 
@@ -148,7 +145,7 @@ public class GoodsInfo {
         this.tag = tag;
     }
 
-    public GoodsInfo(String goodsId, String goodsName, String price, String variety, String monthSale, String commentNum, String detail, String picAddress, String link, String platForm, String aveComment, String tag, String crawDate, SimpleDateFormat ft) {
+    public GoodsInfo(String goodsId, String goodsName, String price, String variety, int monthSale, int commentNum, String detail, String picAddress, String link, String platForm, String aveComment, String tag, String crawDate, SimpleDateFormat ft) {
         this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.price = price;

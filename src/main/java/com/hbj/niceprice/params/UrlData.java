@@ -1,4 +1,4 @@
-package com.hbj.niceprice.util;
+package com.hbj.niceprice.params;
 
 
 public class UrlData {

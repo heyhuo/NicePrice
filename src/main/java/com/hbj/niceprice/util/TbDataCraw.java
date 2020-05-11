@@ -1,4 +1,4 @@
-package com.hbj.niceprice.dao;
+package com.hbj.niceprice.util;
 
 import com.hbj.niceprice.entity.GoodsInfo;
 
@@ -16,6 +16,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.util.*;
+
+import static java.lang.Integer.parseInt;
 
 public class TbDataCraw {
 
@@ -107,7 +109,7 @@ public class TbDataCraw {
                                 "TMALL", "0", dealWan(monthSale), dealWan(commentNum));
 //
                         resultList.add(goodsInfo);
-//                        System.out.println(goodsInfo.toString());
+                        System.out.println(goodsInfo.toString());
                     }
                     // 消耗掉实体
                     EntityUtils.consume(response.getEntity());
@@ -166,14 +168,14 @@ public class TbDataCraw {
         return "详情";
     }
 
-    public String dealWan(String s) {
+    public int dealWan(String s) {
         int length = s.length();
-        if (s.length() == 0) return s;
+        if (s.length() == 0) return -1;
         if ("万".equals(s.substring(length - 1, length))) {
             Double mon = Double.valueOf(s.substring(0, length - 1)) * 10000;
-            return mon.toString();
+            return mon.intValue();
         }
-        return s;
+        return parseInt(s);
     }
 
     private String getDeatil(Document doc) {

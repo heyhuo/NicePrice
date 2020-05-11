@@ -1,12 +1,24 @@
 package com.hbj.niceprice.entity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PriceSave {
 
     public String goodsId;
     public String platForm;
     public String priceTime;
-    public String price;
+    public int price;
+    SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
 
+    public PriceSave() {
+    }
+
+    public PriceSave(String goodsId, String priceTime, int price) {
+        this.goodsId = goodsId;
+        this.priceTime = ft.format(new Date());
+        this.price = price;
+    }
 
     public String getGoodsId() {
         return goodsId;
@@ -32,11 +44,11 @@ public class PriceSave {
         this.priceTime = priceTime;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

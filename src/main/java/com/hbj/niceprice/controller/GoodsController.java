@@ -1,21 +1,16 @@
 package com.hbj.niceprice.controller;
 
-import com.hbj.niceprice.dao.TbDataCraw;
+import com.hbj.niceprice.util.TbDataCraw;
 import com.hbj.niceprice.entity.GoodsInfo;
-import com.hbj.niceprice.service.Flink2GoodsInfoService;
-import com.hbj.niceprice.service.GoodsInfoService;
-import com.hbj.niceprice.util.Catalogs;
-import com.hbj.niceprice.util.KafkaUtil;
-import com.hbj.niceprice.util.UrlConst;
+import com.hbj.niceprice.service.goodsInfo.GoodsInfoKafka2FlinkService;
+import com.hbj.niceprice.service.goodsInfo.GoodsInfoService;
+import com.hbj.niceprice.params.Catalogs;
+import com.hbj.niceprice.service.goodsInfo.GoodsInfoKafka;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -78,10 +73,9 @@ public class GoodsController {
     public String crawTbGoodsInfo(String keyword) {
 
         String topicName = "crawTbGoodsInfo";
-        Flink2GoodsInfoService fgs = new Flink2GoodsInfoService(topicName);
-        KafkaUtil ku = fgs.getKafkaUtil();
-        ku.setKeyword(keyword);
-        Thread thread = new Thread(ku);
+        GoodsInfoKafka2FlinkService fgs = new GoodsInfoKafka2FlinkService(topicName);
+        GoodsInfoKafka goodsInfoKafka = new GoodsInfoKafka(null, fgs.getKafkaUtil());
+        Thread thread = new Thread(goodsInfoKafka);
         thread.start();
 
         Thread t = new Thread(fgs);

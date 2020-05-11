@@ -1,4 +1,4 @@
-package com.hbj.niceprice.util;
+package com.hbj.niceprice.params;
 
 public enum Catalogs {
     电子设备_elecDevice,

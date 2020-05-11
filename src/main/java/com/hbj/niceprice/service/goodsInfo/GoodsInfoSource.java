@@ -1,4 +1,4 @@
-package com.hbj.niceprice.util;
+package com.hbj.niceprice.service.goodsInfo;
 
 import com.hbj.niceprice.entity.GoodsInfo;
 import org.apache.flink.configuration.Configuration;
@@ -48,8 +48,8 @@ public class GoodsInfoSource extends RichSourceFunction<GoodsInfo> {
                     rs.getString("link"),
                     rs.getString("plat_form"),
                     rs.getString("ave_comment"),
-                    rs.getString("month_sale"),
-                    rs.getString("comment_num"));
+                    rs.getInt("month_sale"),
+                    rs.getInt("comment_num"));
             ctx.collect(goodsInfo);//发送结果
         }
     }

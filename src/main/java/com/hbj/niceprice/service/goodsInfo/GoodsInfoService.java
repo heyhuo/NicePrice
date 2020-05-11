@@ -1,4 +1,4 @@
-package com.hbj.niceprice.service;
+package com.hbj.niceprice.service.goodsInfo;
 
 import com.hbj.niceprice.entity.GoodsInfo;
 import com.hbj.niceprice.mapper.GoodsInfoMapper;
