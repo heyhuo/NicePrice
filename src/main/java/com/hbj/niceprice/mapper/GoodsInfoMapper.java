@@ -22,4 +22,5 @@ public interface GoodsInfoMapper {
 
     List<?> selectPriceById(String goodsId);
 
+    List<GoodsInfo> searchGoodsByGoodsName(String goodsName);
 }

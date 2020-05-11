@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class GoodsInfoSourceFromMysql extends RichSourceFunction<GoodsInfo> {
+public class GoodsInfoSource extends RichSourceFunction<GoodsInfo> {
 
     private static Connection connection;
     PreparedStatement ps = null;

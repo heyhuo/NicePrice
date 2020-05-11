@@ -43,6 +43,13 @@
         order by price_time
     </select>
 
+    <select id="searchGoodsByGoodsName" resultType="GoodsInfo">
+        select *
+        from goods_info
+        where goods_name like #{goodsName}
+        order by month_sale desc
+    </select>
+
     <update id="updateGoodsDetailById">
         update goods_info
         set detail=#{detail}

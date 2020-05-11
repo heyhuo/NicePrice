@@ -8,5 +8,5 @@ function getUrlParam(name) {
 }
 
 $("#logoHome").click(function () {
-    window.open("home.html");
+    window.open("index.html");
 });

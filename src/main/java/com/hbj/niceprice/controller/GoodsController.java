@@ -67,6 +67,12 @@ public class GoodsController {
         return result;
     }
 
+    /* 根据用户输入关键字搜索数据库 */
+    @ResponseBody
+    @RequestMapping(value = "/searchGoodsByGoodsName", method = POST)
+    public List<GoodsInfo> searchGoodsByGoodsName(String goodsName) {
+        return goodsInfoService.searchGoodsByGoodsName("%" + goodsName + "%");
+    }
 
     @RequestMapping(value = "/crawTbGoodsInfo", method = GET)
     public String crawTbGoodsInfo(String keyword) {

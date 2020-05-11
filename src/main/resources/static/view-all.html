@@ -36,11 +36,11 @@
                         </li>
                         <li>
                             <br><br>
-                            <a href="#" >家用电器</a>
+                            <a href="#">家用电器</a>
                         </li>
                         <li>
                             <br><br>
-                            <a href="#" >家居家纺</a>
+                            <a href="#">家居家纺</a>
                         </li>
                         <li>
                             <br><br>
@@ -91,7 +91,7 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <h3 id="goodsVariety">
-                null
+
             </h3>
             <br>
             <div id="goodsList">
@@ -104,9 +104,10 @@
 </body>
 <script type="text/javascript">
     $(function () {
-        let urlParam = decodeURI(getUrlParam("variety"));
-        console.log(urlParam);
-        getListByVariety(urlParam);
+        let variety = decodeURI(getUrlParam("variety"));
+        let goodsName = decodeURI(getUrlParam("goodsName"));
+        console.log(variety + "  " + goodsName);
+        getListByVariety(variety, goodsName);
     })
 
     $("a").click(function () {
@@ -114,49 +115,61 @@
     })
 </script>
 <script type="text/javascript">
-    function getListByVariety(variety) {
+    function getListByVariety(variety, goodsName) {
 
         $("#goodsList").empty();
+        let url;
+        let data;
+        if (variety != "") {
+            url = "/hbj/getListByVariety";
+            data = {variety: variety};
+        } else {
+            url = "/hbj/searchGoodsByGoodsName";
+            data = {goodsName: goodsName};
+        }
         $.ajax({
             type: "POST",
-            url: "/hbj/getListByVariety",
-            data: {
-                variety: variety
-            },
+            url: url,
+            data: data,
             dataType: "json",
             success: function (data) {
                 console.log(data);
-                let rs = data;
-                let a = ' <div class="row">';
-                let b = '';
-                let variety = rs[0].variety;
-                $("#goodsVariety").text(variety);
-                for (let i = 0; i < rs.length; i++) {
-                    console.log(rs[i].price);
-                    b += '<div class="col-md-3">\n' +
-                        '                    <div class="thumbnail">\n' +
-                        '                        <img alt="300x200" src="' + rs[i].picAddress + '"/>\n' +
-                        '                        <div class="caption">\n' +
-                        '                            <div class="row clearfix">\n' +
-                        '                                <div class="col-md-5 column">\n' +
-                        '                                    <h3>￥' + rs[i].price + '</h3>\n' +
-                        '                                </div>\n' +
-                        '                                <div class="col-md-7 column">\n' +
-                        '                                    <br>\n' +
-                        '                                    <s>￥' + rs[i].price + '</s>\n' +
-                        '                                </div>\n' +
-                        '                            </div>\n' +
-                        '                            <a href="goods-detail.html?id=' + rs[i].goodsId + '">' + rs[i].goodsName +
-                        '                            </a>\n' +
-                        '                        </div>\n' +
-                        '                    </div>\n' +
-                        '                </div>';
-                    if ((i + 1) % 4 == 0) {
-                        b = a + b + '</div>';
-                        $("#goodsList").append(b);
-                        b = '';
+                if (data.length == 0) {
+                    $("#goodsList").append("<h3>暂无数据</h3>");
+                } else {
+                    let rs = data;
+                    let a = ' <div class="row">';
+                    let b = '';
+                    let variety = rs[0].variety;
+                    $("#goodsVariety").text(variety);
+                    for (let i = 0; i < rs.length; i++) {
+                        console.log(rs[i].price);
+                        b += '<div class="col-md-3">\n' +
+                            '                    <div class="thumbnail">\n' +
+                            '                        <img alt="300x200" src="' + rs[i].picAddress + '"/>\n' +
+                            '                        <div class="caption">\n' +
+                            '                            <div class="row clearfix">\n' +
+                            '                                <div class="col-md-5 column">\n' +
+                            '                                    <h3>￥' + rs[i].price + '</h3>\n' +
+                            '                                </div>\n' +
+                            '                                <div class="col-md-7 column">\n' +
+                            '                                    <br>\n' +
+                            '                                    <s>￥' + rs[i].price + '</s>\n' +
+                            '                                </div>\n' +
+                            '                            </div>\n' +
+                            '                            <a href="goods-detail.html?id=' + rs[i].goodsId + '">' + rs[i].goodsName +
+                            '                            </a>\n' +
+                            '                        </div>\n' +
+                            '                    </div>\n' +
+                            '                </div>';
+                        if ((i + 1) % 4 == 0) {
+                            b = a + b + '</div>';
+                            $("#goodsList").append(b);
+                            b = '';
+                        }
                     }
                 }
+
             }
         })
 

@@ -9,7 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-public class GoodsInfoSinkToMysql extends RichSinkFunction<GoodsInfo> {
+public class GoodsInfoSink extends RichSinkFunction<GoodsInfo> {
 
     PreparedStatement ps;
     private Connection connection;

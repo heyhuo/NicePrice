@@ -2,7 +2,7 @@ package com.hbj.niceprice.service;
 
 import com.alibaba.fastjson.JSON;
 import com.hbj.niceprice.entity.GoodsInfo;
-import com.hbj.niceprice.util.GoodsInfoSinkToMysql;
+import com.hbj.niceprice.util.GoodsInfoSink;
 import com.hbj.niceprice.util.KafkaUtil;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
@@ -36,7 +36,7 @@ public class Flink2GoodsInfoService implements Runnable {
                 this.prop)).setParallelism(1)
                 .map(string -> JSON.parseObject(string, GoodsInfo.class));
         //对于record可以添加一些处理逻辑
-        goodsInfo.addSink(new GoodsInfoSinkToMysql());
+        goodsInfo.addSink(new GoodsInfoSink());
         goodsInfo.print().setParallelism(1);
         try {
             env.execute("Flink Mysql Source->" + this.topicName);

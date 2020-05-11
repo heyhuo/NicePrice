@@ -36,4 +36,8 @@ public class GoodsInfoService {
     public List<?> selectPriceById(String goodsId) {
         return goodsInfoMapper.selectPriceById(goodsId);
     }
+
+    public List<GoodsInfo> searchGoodsByGoodsName(String goodsName) {
+        return goodsInfoMapper.searchGoodsByGoodsName(goodsName);
+    }
 }
