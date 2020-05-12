@@ -351,12 +351,15 @@
                 $("#goodsPic").append(goods_Pic);
                 $("#crawTime").text(data.crawDate);
                 $("#goodsName").text(data.goodsName);
-                $("#goodsPrice").text('￥' + data.price)
+                $("#goodsPrice").text('￥' + data.price);
                 $("#nowLink").append(now_Link);
-                let detail = JSON.parse(data.detail)[0];
-                let i = 0;
-                for (let key in detail) {
-                    $("#detail" + ((i++ % 3) + 1)).append('<span class="tag">' + key + '</span>&nbsp;<label>' + subText(detail[key]) + '</label><br>');
+                let detail = data.detail;
+                if (detail != '详情') {
+                    detail = JSON.parse(data.detail)[0];
+                    let i = 0;
+                    for (let key in detail) {
+                        $("#detail" + ((i++ % 3) + 1)).append('<span class="tag">' + key + '</span>&nbsp;<label>' + subText(detail[key]) + '</label><br>');
+                    }
                 }
             }
         })
