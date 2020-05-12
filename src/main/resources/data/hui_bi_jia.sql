@@ -37,15 +37,23 @@ Create table user_info
 ) COMMENT ='用户';
 
 -- ----评价----
-Create table comments
+-- ----------------------------
+-- Table structure for comments
+-- ----------------------------
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments`
 (
-    user_id       int(10) COMMENT '用户id',
-    goods_id      varchar(30) COMMENT '商品id',
-    grade_comment varchar(3) COMMENT '评价分值',
-    primary key (user_id, goods_id),
-    foreign key (user_id) references user_info (user_id),
-    foreign key (goods_id) references goods_info (goods_id)
-) COMMENT ='评价';
+    `user_id`       int         NOT NULL COMMENT '用户id',
+    `goods_id`      varchar(30) NOT NULL COMMENT '商品id',
+    `grade_comment` varchar(3) DEFAULT NULL COMMENT '评价分值',
+    PRIMARY KEY (`user_id`, `goods_id`),
+    KEY `goods_id` (`goods_id`),
+    CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`),
+    CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`goods_id`) REFERENCES `goods_info` (`goods_id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='评价';
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----价格储存----
 -- ----------------------------
