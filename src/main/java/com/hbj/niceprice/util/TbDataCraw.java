@@ -198,6 +198,37 @@ public class TbDataCraw {
         return jsonObject.toString();
     }
 
+    public Map<String, Object> crawPriceByGoodsName(String goodsName) {
+        try {
+            String url = "https://list.tmall.com/search_product.htm?q=" + goodsName;
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            HttpGet httpGet = new HttpGet(url);
+            httpGet.setHeader("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36");
+            CloseableHttpResponse response = httpclient.execute(httpGet);
+            // 获取响应状态码
+            int statusCode = response.getStatusLine().getStatusCode();
+            try {
+                HttpEntity entity = response.getEntity();
+                // 如果状态响应码为200，则获取html实体内容或者json文件
+                if (statusCode == 200) {
+                    List<GoodsInfo> resultList = new ArrayList<>();
+                    String html = EntityUtils.toString(entity, Consts.UTF_8);
+                    // 提取HTML得到商品信息结果
+                    Document doc = null;
+                    // doc获取整个页面的所有数据
+                    doc = Jsoup.parse(html);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     public static void main(String[] args) throws InterruptedException {
         TbDataCraw tbDataCraw = new TbDataCraw();
 //        String s = tbDataCraw.soupTmallDetailById("38235209262");
